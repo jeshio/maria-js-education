@@ -157,10 +157,10 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
                 className={styles.codeMirror}
             />
             <div className={styles.buttons}>
-                <button onClick={runCode} className={styles.runButton}>
+                <button onClick={runCode} className="button button--secondary button--lg">
                     Запустить
                 </button>
-                <button onClick={() => setShowSolution(!showSolution)} className={styles.solutionButton}>
+                <button onClick={() => setShowSolution(!showSolution)} className="button button--secondary button--lg">
                     {showSolution ? 'Скрыть решение' : 'Показать решение'}
                 </button>
             </div>
