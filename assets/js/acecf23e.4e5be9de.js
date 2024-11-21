@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmaria_js_education=self.webpackChunkmaria_js_education||[]).push([[1903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/maria-js-education/blog","blogTitle":"Blog","authorsListPath":"/maria-js-education/blog/authors"}')}}]);
