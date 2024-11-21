@@ -5,20 +5,20 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Maria-js-education',
+  tagline: 'Окунёмся в JS (JavaScript)',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://jeshio.github.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/maria-js-education/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'jeshio', // Usually your GitHub org/user name.
+  projectName: 'maria-js-education', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -27,8 +27,8 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'ru',
+    locales: ['ru'],
   },
 
   presets: [
@@ -68,9 +68,9 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: 'Maria-js',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Тут логоВО',
         src: 'img/logo.svg',
       },
       items: [
@@ -78,11 +78,11 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Учить тут!',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {to: '/blog', label: 'Обновления', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/jeshio/maria-js-education/',
           label: 'GitHub',
           position: 'right',
         },
@@ -92,55 +92,43 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Доки',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Введение',
               to: '/docs/intro',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Где искать ответы?',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'ChatGPT',
+              href: 'https://chatgpt.com',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
+              label: 'Google',
+              href: 'https://google.com',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'Тут можно добавить ещё что-то',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Но ничего нет',
+              to: '/',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Копирайт за мной © ${new Date().getFullYear()} Maria-js, jeshio@yandex.ru`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-
-    projectName: 'jeshio.github.io',
-    organizationName: 'jeshio',
-    trailingSlash: false,
   } satisfies Preset.ThemeConfig,
 };
 

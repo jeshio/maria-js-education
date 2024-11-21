@@ -1,12 +1,10 @@
-yangshun:
-  name: Yangshun Tay
-  title: Front End Engineer @ Facebook
-  url: https://github.com/yangshun
-  image_url: https://github.com/yangshun.png
-  page: true
+jeshio:
+  name: Georgey Ivanov
+  title: Team Lead Front End Developer
+  url: https://jeshio.github.io/portfolio
+  image_url: https://github.com/jeshio.png
   socials:
-    x: yangshunz
-    github: yangshun
+    github: jeshio
 
 slorber:
   name: Sébastien Lorber

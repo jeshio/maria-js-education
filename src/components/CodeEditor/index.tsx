@@ -40,14 +40,9 @@ interface CodeEditorProps {
 }
 
 const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
-    const [code, setCode] = useState<string>(
-        `// Напишите ваш код здесь
-// Например:
-let myTestVariable = 'Моя первая переменная';
-const myTestConstant = 'Моя первая константа';`
-    );
-    const [output, setOutput] = useState<string>('');
-    const [showSolution, setShowSolution] = useState<boolean>(false);
+    const [code, setCode] = useState(`// Напиши здесь свой код и нажми Запустить`);
+    const [output, setOutput] = useState('');
+    const [showSolution, setShowSolution] = useState(false);
 
     const runCode = () => {
         try {
@@ -169,9 +164,9 @@ const myTestConstant = 'Моя первая константа';`
                     {showSolution ? 'Скрыть решение' : 'Показать решение'}
                 </button>
             </div>
-            <div className={styles.output}>
+            {output && <div className={styles.output}>
                 <strong>Результат:</strong> {output}
-            </div>
+            </div>}
             {showSolution && (
                 <div className={styles.solution}>
                     <strong>Решение:</strong>
