@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmaria_js_education=self.webpackChunkmaria_js_education||[]).push([[1903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/blog","blogTitle":"Blog","authorsListPath":"/blog/authors"}')}}]);
