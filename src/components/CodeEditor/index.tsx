@@ -41,7 +41,7 @@ interface CodeEditorProps {
 
 const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
     const [code, setCode] = useState(`// Напиши здесь свой код и нажми Запустить`);
-    const [output, setOutput] = useState('');
+    const [output, setOutput] = useState([]);
     const [showSolution, setShowSolution] = useState(false);
 
     const runCode = () => {
@@ -69,7 +69,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
             // Выполняем функцию и получаем контекст
             const result = func();
 
-            let messages: string[] = [];
+            let messages: JSX.Element[] = [];
 
             checks.forEach((check) => {
                 switch (check.type) {
@@ -78,11 +78,11 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
                         const value = result[check.name];
                         if (value === check.expectedValue) {
                             messages.push(
-                                `${check.type === 'variable' ? 'Переменная' : 'Константа'} \`${check.name}\` установлена правильно.`
+                                <div>Значение для `{check.name}` установлено правильно.</div>
                             );
                         } else {
                             messages.push(
-                                `${check.type === 'variable' ? 'Переменная' : 'Константа'} \`${check.name}\` должна быть равна \`${check.expectedValue}\`, но получила \`${value}\`.`
+                                <div>Значение для `{check.name}` должно быть равно `{String(check.expectedValue)}`, но получено `{String(value)}`.</div>
                             );
                         }
                         break;
@@ -95,12 +95,12 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
                             value.length === check.expectedValue.length &&
                             value.every((item, index) => item === check.expectedValue[index]);
                         if (isEqual) {
-                            messages.push(`Массив \`${check.name}\` установлен правильно.`);
+                            messages.push(<div>Массив \`{check.name}\` установлен правильно.</div>);
                         } else {
                             messages.push(
-                                `Массив \`${check.name}\` должен быть равен \`${JSON.stringify(
+                                <div>Массив `{check.name}` должен быть равен `{JSON.stringify(
                                     check.expectedValue
-                                )}\`, но получил \`${JSON.stringify(value)}\`.`
+                                )}`, но получил `{JSON.stringify(value)}`.</div>
                             );
                         }
                         break;
@@ -108,7 +108,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
                     case 'function': {
                         const funcToTest = result[check.name];
                         if (typeof funcToTest !== 'function') {
-                            messages.push(`\`${check.name}\` не является функцией.`);
+                            messages.push(<div>\`{check.name}\` не является функцией.</div>);
                             break;
                         }
                         check.tests.forEach((test, index) => {
@@ -121,15 +121,15 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
                                 }
                             } catch (e: any) {
                                 messages.push(
-                                    `Функция \`${check.name}\` вызвала ошибку при выполнении теста ${index + 1}: ${e.message}`
+                                    <div>Функция `{check.name}` вызвала ошибку при выполнении теста {index + 1}: {e.message}</div>
                                 );
                                 return;
                             }
                             if (resultValue === test.output) {
-                                messages.push(`Функция \`${check.name}\` прошла тест ${index + 1} правильно.`);
+                                messages.push(<div>Функция `{check.name}` прошла тест {index + 1} правильно.</div>);
                             } else {
                                 messages.push(
-                                    `Функция \`${check.name}\` не прошла тест ${index + 1}. Ожидалось \`${test.output}\`, но получила \`${resultValue}\`.`
+                                    <div>Функция `{check.name}` не прошла тест {index + 1}. Ожидалось `{test.output}`, но получила `{resultValue}`.</div>
                                 );
                             }
                         });
@@ -140,9 +140,9 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
                 }
             });
 
-            setOutput(messages.join(' '));
+            setOutput(messages);
         } catch (error: any) {
-            setOutput(`Ошибка: ${error.message}`);
+            setOutput([<div>Ошибка: {error.message}</div>]);
         }
     };
 
@@ -164,7 +164,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
                     {showSolution ? 'Скрыть решение' : 'Показать решение'}
                 </button>
             </div>
-            {output && <div className={styles.output}>
+            {output.length > 0 && <div className={styles.output}>
                 <strong>Результат:</strong> {output}
             </div>}
             {showSolution && (
