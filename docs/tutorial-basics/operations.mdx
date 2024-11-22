@@ -1,0 +1,83 @@
+---
+sidebar_position: 4
+---
+
+import CodeEditor from '@site/src/components/CodeEditor';
+
+# 1.4 Операции между переменными и константами
+
+## Знания
+
+:::tip[Что это такое?]
+Операции позволяют выполнять различные действия с данными, хранящимися в переменных и константах. В JavaScript существуют различные типы операций для разных типов данных.
+:::
+
+### **Операции со строками (`string`)**
+
+Строки можно объединять (___конкатенировать___) и выполнять над ними другие операции.
+
+**Пример операций со строками:**
+
+```javascript
+let greeting = 'Привет, ';
+const name = 'Маша';
+
+let message = greeting + name; // Конкатенация строк -> 'Привет, Маша'
+
+let upperCaseName = name.toUpperCase(); // Преобразование строки в верхний регистр -> 'МАША'
+
+const messageWithName = message + '; сообщение от ' + upperCaseName // -> Привет, Маша; сообщение от МАША
+```
+
+### **Операции с числами (`number`)**
+
+С числами можно выполнять математические операции: сложение, вычитание, умножение, деление и другие.
+
+**Пример операций с числами:**
+
+```javascript
+let a = 10;
+const b = 5;
+
+let sum = a + b; // Сложение -> 15
+
+let difference = a - b; // Вычитание -> 5
+
+let product = a * b; // Умножение -> 50
+
+let quotient = a / b; // Деление -> 2
+
+let remainder = a % b; // Остаток от деления -> 0
+
+let anotherRemainder = 12 % b; // Остаток от деления -> 2
+```
+
+## Практическое задание
+
+__Задача__: Выполни следующие операции:
+
+1. Объяви переменную `firstName` со значением `Мария` и константу `lastName` со значением `Иванова`.
+2. Объедини `firstName` и `lastName` в переменную `fullName`.
+3. Объяви переменную `age` со значением `30` и константу `yearsToRetirement` со значением `65`.
+4. Вычисли, сколько лет осталось до пенсии, сохранив результат в переменную `yearsLeft`.
+
+<CodeEditor
+    checks={[
+        { type: 'variable', name: 'firstName', expectedValue: 'Мария' },
+        { type: 'variable', name: 'lastName', expectedValue: 'Иванова' },
+        { type: 'variable', name: 'fullName', expectedValue: 'Мария Иванова' },
+        { type: 'variable', name: 'age', expectedValue: 30 },
+        { type: 'variable', name: 'yearsToRetirement', expectedValue: 65 },
+        { type: 'variable', name: 'yearsLeft', expectedValue: 35 },
+    ]}
+    solution={`let firstName = 'Мария';
+const lastName = 'Иванова';
+
+let fullName = firstName + ' ' + lastName;
+
+let age = 30;
+const yearsToRetirement = 65;
+
+let yearsLeft = yearsToRetirement - age;`}
+/>
+```

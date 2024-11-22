@@ -1,0 +1,106 @@
+---
+sidebar_position: 5
+---
+
+import CodeEditor from '@site/src/components/CodeEditor';
+
+# 1.5 Булева логика
+
+## Знания
+
+:::tip[Что это такое?]
+Булева логика — это система операций, работающая с двумя значениями: `true` (истина) и `false` (ложь). В программировании она используется для проверки условий и управления потоком выполнения программы.
+:::
+
+### **Основные операции**
+
+#### 1. **Логическое И (`&&`)**
+Возвращает `true`, если оба значения являются истиной.
+
+**Пример:**
+```javascript
+let isStudent = true;
+let hasID = true;
+
+let canEnter = isStudent && hasID; // -> true (оба условия истинны)
+
+let cannotEnter = isStudent && false; // -> false (одно из условий ложно)
+```
+
+#### 2. **Логическое ИЛИ (`||`)**
+Возвращает `true`, если хотя бы одно значение является истиной.
+
+**Пример:**
+```javascript
+let isAdmin = false;
+let isModerator = true;
+
+let canEdit = isAdmin || isModerator; // -> true (хотя бы одно условие истинно)
+```
+
+#### 3. **Логическое НЕ (`!`)**
+Инвертирует значение. `true` становится `false`, и наоборот.
+
+**Пример:**
+```javascript
+let isGuest = false;
+
+let isNotGuest = !isGuest; // -> true (гость превращается в не-гостя)
+
+// А можно даже так, если использовать скобки.
+// Сначала вычисляется значение внутри скобок.
+const isNotTest = !(isGuest || true) // -> false
+```
+
+### **Сравнения**
+
+Булева логика часто используется с операторами сравнения:
+- `>` (больше)
+- `<` (меньше)
+- `>=` (больше или равно)
+- `<=` (меньше или равно)
+- `===` (строгое равенство)
+- `!==` (строгое неравенство)
+
+**Пример:**
+```javascript
+let age = 20;
+
+let isAdult = age >= 18; // -> true (20 больше или равно 18)
+let isTeen = age < 18; // -> false (20 не меньше 18)
+
+let isExactMatch = age === 20; // -> true (значение совпадает с 20)
+let isDifferent = age !== 15; // -> true (значение не совпадает с 15)
+```
+
+:::warning[Особенности булевой логики]
+- `&&` и `||` возвращают первое "неподходящее" значение (или последнее, если все условия истинны).
+- Используйте скобки для уточнения приоритета операций, например: `(condition1 && condition2) || condition3`.
+:::
+
+## Практическое задание
+
+__Задача__: Выполни следующие шаги:
+
+1. Объяви переменную `age` со значением `25`.
+2. Объяви переменную `hasDrivingLicense` со значением `true`.
+3. Объяви переменную `isEmployed` со значением `false`.
+4. Создай переменную `canRentCar`, которая будет равна `true`, если `age` больше или равно `21` и у человека есть водительские права.
+5. Создай переменную `isEligibleForLoan`, которая будет равна `true`, если человек старше `18` и либо трудоустроен, либо имеет водительские права.
+
+<CodeEditor
+    checks={[
+        { type: 'variable', name: 'age', expectedValue: 25 },
+        { type: 'variable', name: 'hasDrivingLicense', expectedValue: true },
+        { type: 'variable', name: 'isEmployed', expectedValue: false },
+        { type: 'variable', name: 'canRentCar', expectedValue: true },
+        { type: 'variable', name: 'isEligibleForLoan', expectedValue: true },
+    ]}
+    solution={`let age = 25;
+let hasDrivingLicense = true;
+let isEmployed = false;
+
+    let canRentCar = age >= 21 && hasDrivingLicense;
+    let isEligibleForLoan = age > 18 && (isEmployed || hasDrivingLicense);`}
+/>
+```
