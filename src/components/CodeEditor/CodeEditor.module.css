@@ -25,6 +25,11 @@
     border-radius: 4px;
 }
 
+.output pre {
+    display: inline;
+    padding: 2px 4px;
+}
+
 .solution {
     margin-top: 10px;
     padding: 10px;
