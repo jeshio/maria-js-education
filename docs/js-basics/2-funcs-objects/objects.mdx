@@ -60,15 +60,35 @@ const dog = {
 Теперь ты можешь легко получать доступ к данным:
 
 ```javascript
-dog.name; // -> 'Того'
-const howManyYears = dog.age; // -> 4
+const story = 'У нас есть ' + dog.name + ' и ему ' + dog.age + ' года'; // -> У нас есть Того и ему 4 года
 ```
 
 Или изменять их:
 
 ```javascript
-dog.isHungry = false;
-const isTogoHungry = dog.isHungry; // -> false
+const myCar = {
+    brand: 'Hyundai',
+    price: 200,
+}
+myCar.price = 350;
+
+// -> Моя машина Hyundai стоит 350 рублей
+const story = 'Моя машина ' + myCar.brand + ' стоит ' + myCar.price + ' рублей';
+```
+
+А можно добавить новые свойства или методы:
+```javascript
+const myCar = {
+    brand: 'Hyundai',
+    price: 200,
+}
+myCar.beep = function () {
+    return 'БИИПип!'
+}
+myCar.color = 'серебряный'
+
+// -> У моей машины Hyundai серебряный цвет и она делает БИИПип!
+const story = 'У моей машины ' + myCar.brand + myCar.color + ' цвет и она делает ' + myCar.beep();
 ```
 
 :::tip[Как объекты делают жизнь проще?]
