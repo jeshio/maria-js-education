@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-import CodeEditor from '@site/src/components/CodeEditor';
+import CodeEditorWithTests from '@site/src/components/CodeEditorWithTests';
 
 # 1.3 Типы данных
 
@@ -79,7 +79,7 @@ __Задача__: Объяви три переменные или констан
 
 Потом измени значение `myNumber` на `42`.
 
-<CodeEditor
+<CodeEditorWithTests
     checks={[
         { type: 'constant', name: 'myString', expectedValue: 'Я люблю программировать' },
         { type: 'variable', name: 'myNumber', expectedValue: 42 },

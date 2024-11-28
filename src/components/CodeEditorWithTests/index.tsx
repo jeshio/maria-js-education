@@ -34,12 +34,12 @@ interface FunctionCheck {
 
 type Check = VariableCheck | ConstantCheck | ArrayCheck | FunctionCheck;
 
-interface CodeEditorProps {
+interface ICodeEditorWithTestsProps {
     checks: Check[];
     solution: string; // Решение для отображения
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
+const CodeEditorWithTests: React.FC<ICodeEditorWithTestsProps> = ({ checks, solution }) => {
     const [code, setCode] = useState(`// Напиши здесь свой код и нажми Запустить`);
     const [output, setOutput] = useState([]);
     const [showSolution, setShowSolution] = useState(false);
@@ -178,4 +178,4 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ checks, solution }) => {
     );
 };
 
-export default CodeEditor;
+export default CodeEditorWithTests;

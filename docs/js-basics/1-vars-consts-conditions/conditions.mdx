@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-import CodeEditor from '@site/src/components/CodeEditor';
+import CodeEditorWithTests from '@site/src/components/CodeEditorWithTests';
 
 # 1.6 Условия
 
@@ -148,7 +148,7 @@ __Задача__: Выполни следующие шаги:
 5. Нажми _Запустить_ и проверь своё решение
 6. Попробуй поставить для константы `timeOfDay` значения `11`, `15`, `23`, `3` (и каждый раз нажимай _Запустить_). Всё ли работает как ты ожидала?
 
-<CodeEditor
+<CodeEditorWithTests
     checks={[
         { type: 'variable', name: 'timeOfDay', expectedValue: 12 },
         { type: 'variable', name: 'greeting', expectedValue: 'Привет, день!' },

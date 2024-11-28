@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-import CodeEditor from '@site/src/components/CodeEditor';
+import CodeEditorWithTests from '@site/src/components/CodeEditorWithTests';
 
 # 1.5 Булева логика
 
@@ -102,7 +102,7 @@ __Задача__: Выполни следующие шаги:
 6. Нажми Запустить и проверь, что всё правильно
 7. Когда сделаешь всё правильно, то попробуй поизменять значения переменных и понажимать Запустить, чтобы увидеть как меняется результат. Делай это пока не поймешь всю логику - твоя цель, понять, __как одни значения влияют на другие__.
 
-<CodeEditor
+<CodeEditorWithTests
     checks={[
         { type: 'variable', name: 'age', expectedValue: 25 },
         { type: 'variable', name: 'hasDrivingLicense', expectedValue: true },

@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-import CodeEditor from '@site/src/components/CodeEditor';
+import CodeEditorWithTests from '@site/src/components/CodeEditorWithTests';
 
 # 1.2 Переменные
 
@@ -47,4 +47,4 @@ myVariable = 'Новое значение'; // Изменили её значе�
 
 __Задача__: Объяви переменную `whoIsProgrammer` со значением `Гоша` и затем измени её значение на `Маша`.
 
-<CodeEditor checks={[ { type: 'variable', name: 'whoIsProgrammer', expectedValue: 'Маша' } ]} solution={`let whoIsProgrammer = 'Гоша';\nwhoIsProgrammer = 'Маша';`} />
+<CodeEditorWithTests checks={[ { type: 'variable', name: 'whoIsProgrammer', expectedValue: 'Маша' } ]} solution={`let whoIsProgrammer = 'Гоша';\nwhoIsProgrammer = 'Маша';`} />

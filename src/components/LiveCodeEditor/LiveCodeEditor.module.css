@@ -1,0 +1,9 @@
+.liveCodeContainer {
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.editor {
+    margin: 12px 0;
+}

@@ -5668,6 +5668,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
+livecodes@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/livecodes/-/livecodes-0.6.0.tgz#3ad0d4361f6615cea62b8d40acfa33a892d1542f"
+  integrity sha512-nUqS6yy3NAKhVw+wt6yLKiqKSNbpbaJddI+KgtpMeQuIclBZbvhXK/enF8w/vQfxODPf5tmXkq765DIDxwTLTA==
+
 loader-runner@^4.2.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-4.3.0.tgz#c1b4a163b99f614830353b16755e7149ac2314e1"
