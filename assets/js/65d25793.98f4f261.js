@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmaria_js_education=self.webpackChunkmaria_js_education||[]).push([[786],{8903:a=>{a.exports=JSON.parse('{"metadata":{"permalink":"/maria-js-education/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
