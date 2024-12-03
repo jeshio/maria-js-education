@@ -20,7 +20,7 @@ import CodeEditorWithTests from '@site/src/components/CodeEditorWithTests';
 const dog = {
   name: 'Того',
   age: 4,
-  isHungry: true
+  isHungry: true,
 };
 ```
 
@@ -37,7 +37,7 @@ const dog = {
   name: 'Того',
   bark: function() {
     return 'Гав-гав!';
-  }
+  },
 };
 
 const result = dog.bark(); // -> 'Гав-гав!'
@@ -53,7 +53,7 @@ const result = dog.bark(); // -> 'Гав-гав!'
 const dog = {
   name: 'Того',
   age: 4,
-  isHungry: true
+  isHungry: true,
 };
 ```
 
@@ -99,7 +99,7 @@ const myCar = {
     price: 200,
 }
 myCar.beep = function () {
-    return 'БИИПип!'
+    return 'БИИПип!';
 }
 myCar.color = 'серебряный'
 
@@ -126,7 +126,7 @@ __Задача__: Создай объект `book` и поработай с ег
 2. Добавь свойство `year` со значением `1818`.
 3. Добавь метод `read`, который возвращает строку `'Здесь как-бы текст книги'`.
 4. Используя свойства объекта создай переменную `whatWeKnowAboutBook`. В результате должна получится строка:
-`'Книга Доводы рассудка написана в 1818 году, автор Джейн Остин'`
+`'Книга Доводы рассудка написана в 1818 году, автор Джейн Остин.'`
 
 <CodeEditorWithTests
     checks={[
@@ -141,11 +141,12 @@ __Задача__: Создай объект `book` и поработай с ег
       title: 'Доводы рассудка',
       author: 'Джейн Остин',
       mainCharacter: 'Энн',
-      year: 1818,
-      read: function() {
-            return 'Здесь как-бы текст книги';
-      }
 };
+
+book.year = 1818;
+book.read = function() {
+    return 'Здесь как-бы текст книги';
+}
 
 const whatWeKnowAboutBook = 'Книга ' + book.title + ' написана в ' + book.year + ' году, автор ' + book.author + '.';`}
 />
