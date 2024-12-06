@@ -114,6 +114,7 @@ const CodeEditorWithTests: React.FC<ICodeEditorWithTestsProps> = ({ checks, solu
                         check.tests.forEach((test, index) => {
                             let resultValue;
                             const params = Array.isArray(test.input) ? [...test.input] : [test.input]
+                            const paramsString = params.map((param) => typeof param === 'object' ? JSON.stringify(param) : String(param)).join(', ')
 
                             try {
                                 resultValue = funcToTest(...params);
@@ -124,10 +125,10 @@ const CodeEditorWithTests: React.FC<ICodeEditorWithTestsProps> = ({ checks, solu
                                 return;
                             }
                             if (resultValue === test.output) {
-                                messages.push(<div key={`${key}-${index}`}>✅ Функция <code>{check.name}</code> прошла тест <code>{check.name}({params.join(', ')}) === {String(test.output)}</code>  правильно.</div>);
+                                messages.push(<div key={`${key}-${index}`}>✅ Функция <code>{check.name}</code> прошла тест <code>{check.name}({paramsString}) === {String(test.output)}</code>  правильно.</div>);
                             } else {
                                 messages.push(
-                                    <div key={`${key}-${index}`}>❌ Функция <code>{check.name}</code> не прошла тест <code>{check.name}({params.join(', ')}) === {String(test.output)}</code>. Ожидалось <code>{String(test.output)}</code>, но получено <code>{String(resultValue)}</code>.</div>
+                                    <div key={`${key}-${index}`}>❌ Функция <code>{check.name}</code> не прошла тест <code>{check.name}({paramsString}) === {String(test.output)}</code>. Ожидалось <code>{String(test.output)}</code>, но получено <code>{String(resultValue)}</code>.</div>
                                 );
                             }
                         });

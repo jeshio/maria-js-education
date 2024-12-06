@@ -183,7 +183,11 @@ for (let i = 0; i < numbers.length; i++) {
 }
 
 let joinedNumbers = '';
-for (const number of numbers) {
-    joinedNumbers = joinedNumbers + ',' + number;
+for (let i = 0; i < numbers.length; i++) {
+    joinedNumbers = joinedNumbers + numbers[i];
+    if (i < numbers.length - 1)
+    {
+        joinedNumbers = joinedNumbers + ',';
+    }
 }`}
 />
