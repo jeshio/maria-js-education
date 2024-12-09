@@ -112,9 +112,12 @@ const CodeEditorWithTests: React.FC<ICodeEditorWithTestsProps> = ({ checks, solu
                             break;
                         }
                         check.tests.forEach((test, index) => {
+                            const stringifyIfNeed = (param: any) =>
+                                typeof param === 'object' ? JSON.stringify(param) : param
                             let resultValue;
                             const params = Array.isArray(test.input) ? [...test.input] : [test.input]
                             const paramsString = params.map((param) => typeof param === 'object' ? JSON.stringify(param) : String(param)).join(', ')
+
 
                             try {
                                 resultValue = funcToTest(...params);
@@ -124,7 +127,7 @@ const CodeEditorWithTests: React.FC<ICodeEditorWithTestsProps> = ({ checks, solu
                                 );
                                 return;
                             }
-                            if (resultValue === test.output) {
+                            if (stringifyIfNeed(resultValue) === stringifyIfNeed(test.output)) {
                                 messages.push(<div key={`${key}-${index}`}>✅ Функция <code>{check.name}</code> прошла тест <code>{check.name}({paramsString}) === {String(test.output)}</code>  правильно.</div>);
                             } else {
                                 messages.push(

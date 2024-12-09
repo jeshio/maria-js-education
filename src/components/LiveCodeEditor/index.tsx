@@ -26,7 +26,6 @@ export const LiveCodeEditor: React.FC<ILiveCodeEditorProps> = ({ code = "// зд
                     mode: "simple",
                     formatOnsave: true,
                     trailingComma: true,
-                    enableAI: true,
                     tools: {
                         active: 'console',
                         status:'full'

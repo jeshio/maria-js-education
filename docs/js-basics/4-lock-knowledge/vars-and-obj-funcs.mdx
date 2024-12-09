@@ -26,9 +26,10 @@ import CodeEditorWithTests from '@site/src/components/CodeEditorWithTests';
 
 ### Условие
 
-Создай переменную `userName` и присвой ей значение `"Анна"`. Затем создай константу `welcomeMessage`, которая содержит строку `"Добро пожаловать, "`, и добавь к ней значение переменной `userName`.
+Создай переменную `userName` и присвой ей значение `"Анна"`. Затем создай константу `welcomeMessage`, которая содержит строку `"Добро пожаловать, "`.
+Выведи `welcomeMessage` и `userName`.
 
-Затем измени значение переменной `userName` на `"Олег"` и снова выведи приветственное сообщение в переменной `welcomeMessage`.
+Затем измени значение переменной `userName` на `"Олег"` и снова выведи приветственное сообщение с константой `welcomeMessage`.
 
 Ожидаемый вывод:
 ```
@@ -37,14 +38,6 @@ import CodeEditorWithTests from '@site/src/components/CodeEditorWithTests';
 ```
 
 <LiveCodeEditor
-    code={`// Создай переменную userName и присвой ей значение "Анна"
-
-// Создай константу welcomeMessage, добавь к ней userName
-
-// Измени значение userName на "Олег"
-
-// Выведи новое приветственное сообщение
-`}
     solution={`let userName = 'Анна';
 const welcomeMessage = 'Добро пожаловать, ';
 
@@ -133,10 +126,6 @@ console.log(greet('Иванов', 'Иван')); // Неправильно
 - `price = 250`, `quantity = 2` (должно вернуть `"Общая стоимость: 500 за 2 шт"`).
 
 <LiveCodeEditor
-    code={`// Создай функцию calculateTotalPrice
-
-// Проверь функцию с двумя наборами параметров
-`}
     solution={`function calculateTotalPrice(price, quantity) {
   return 'Общая стоимость: ' + (price * quantity) + ' за ' + quantity + ' шт';
 }

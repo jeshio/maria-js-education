@@ -1,0 +1,209 @@
+---
+sidebar_position: 2
+---
+
+import LiveCodeEditor from '@site/src/components/LiveCodeEditor';
+import CodeEditorWithTests from '@site/src/components/CodeEditorWithTests';
+
+# 2. Массивы, циклы и снова функции
+
+## Введение
+
+Мы уже изучили, как создавать массивы, перебирать их с помощью циклов и использовать функции для обработки данных. Теперь настало время объединить эти знания и научиться решать более сложные задачи, используя массивы, циклы и функции вместе.
+
+---
+
+## Задача 1: Сумма чётных чисел
+
+:::info[Напоминание]
+
+Чтобы проверить, является ли число чётным, можно использовать оператор `%` (остаток от деления):
+```javascript
+if (number % 2 === 0) {
+  console.log('Чётное');
+}
+```
+Чётные числа делятся на 2 без остатка.
+:::
+
+---
+
+### Условие
+
+Создай массив `numbers` с числами `1, 2, 3, 4, 5, 6`. Затем напиши функцию `getEvenSum`, которая принимает массив чисел, находит все чётные числа и возвращает их сумму.
+
+Пример:
+```javascript
+console.log(getEvenSum([1, 2, 3, 4, 5, 6])); // Ожидаем: 12
+```
+
+<CodeEditorWithTests
+    checks={[
+        { type: 'function', name: 'getEvenSum', tests: [{ input: [[1, 2, 3, 4, 5, 6]], output: 12 }] }
+    ]}
+    solution={`function getEvenSum(numbers) {
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] % 2 === 0) {
+          sum += numbers[i];
+        }
+    }
+    return sum;
+}
+`}
+/>
+
+---
+
+## Задача 2: Обратный порядок
+
+:::tip
+
+Чтобы перебирать массив в обратном порядке, можно начать с последнего элемента и двигаться к первому:
+```javascript
+for (let i = array.length - 1; i >= 0; i--) {
+  console.log(array[i]);
+}
+```
+Попробуй догадаться, почему `i` инициализируется со значением `array.length - 1`?
+:::
+
+---
+
+### Условие
+
+Создай функцию `reverseArray`, которая принимает массив и возвращает новый массив, элементы которого расположены в обратном порядке.
+
+Пример:
+```javascript
+console.log(reverseArray(['яблоко', 'банан', 'вишня'])); // Ожидаем: ['вишня', 'банан', 'яблоко']
+```
+
+<CodeEditorWithTests
+    checks={[
+        { type: 'function', name: 'reverseArray', tests: [{ input: [['яблоко', 'банан', 'вишня']], output: ['вишня', 'банан', 'яблоко'] }] }
+    ]}
+    solution={`function reverseArray(array) {
+    let reversed = [];
+    for (let i = array.length - 1; i >= 0; i--) {
+        reversed.push(array[i]);
+    }
+    return reversed;
+}
+`}
+/>
+
+---
+
+## Задача 3: Словарь
+
+### Условие
+
+Создай массив объектов `dictionary`, где каждый объект содержит два свойства:
+1. `word` — слово на русском.
+2. `translation` — его перевод на английский.
+
+Пример:
+```javascript
+const dictionary = [
+  { word: 'яблоко', translation: 'apple' },
+  { word: 'банан', translation: 'banana' },
+  { word: 'вишня', translation: 'cherry' },
+];
+```
+
+Затем напиши функцию `translate`, которая принимает массив `dictionary` и слово на русском. Функция должна возвращать перевод слова на английский. Если слово не найдено, возвращай строку `"Перевод не найден"`.
+
+Пример вызова:
+```javascript
+console.log(translate(dictionary, 'банан')); // Ожидаем: "banana"
+console.log(translate(dictionary, 'груша')); // Ожидаем: "Перевод не найден"
+```
+
+<LiveCodeEditor
+    code={`const dictionary = [
+  { word: 'яблоко', translation: 'apple' },
+  { word: 'банан', translation: 'banana' },
+  { word: 'вишня', translation: 'cherry' },
+];
+
+// Создай функцию translate
+// Проверь её с примерами
+`}
+    solution={`const dictionary = [
+    { word: 'яблоко', translation: 'apple' },
+    { word: 'банан', translation: 'banana' },
+    { word: 'вишня', translation: 'cherry' },
+];
+
+function translate(dictionary, word) {
+    for (let i = 0; i < dictionary.length; i++) {
+        if (dictionary[i].word === word) {
+            return dictionary[i].translation;
+        }
+    }
+    return 'Перевод не найден';
+}
+
+console.log(translate(dictionary, 'банан')); // "banana"
+console.log(translate(dictionary, 'груша')); // "Перевод не найден"
+`}
+/>
+
+---
+
+## Задача 4: Работа с несколькими функциями
+
+### Условие
+
+Создай массив `numbers` с числами `10, 20, 30, 40, 50`. Напиши две функции:
+1. `getAverage(numbers)` — возвращает среднее арифметическое чисел.
+2. `getAboveAverage(numbers, average)` — возвращает массив чисел, которые больше среднего.
+
+Пример:
+```javascript
+const numbers = [10, 20, 30, 40, 50];
+const average = getAverage(numbers); // Ожидаем: 30
+console.log(getAboveAverage(numbers, average)); // Ожидаем: [40, 50]
+```
+
+<LiveCodeEditor
+    code={`const numbers = [10, 20, 30, 40, 50];
+
+// Создай функцию getAverage
+
+// Создай функцию getAboveAverage
+
+// Проверь результат
+`}
+    solution={`const numbers = [10, 20, 30, 40, 50];
+
+function getAverage(numbers) {
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum / numbers.length;
+}
+
+function getAboveAverage(numbers, average) {
+    let result = [];
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] > average) {
+            result.push(numbers[i]);
+        }
+    }
+    return result;
+}
+
+const average = getAverage(numbers);
+console.log(average); // 30
+console.log(getAboveAverage(numbers, average)); // [40, 50]
+`}
+/>
+
+---
+
+## Итоги
+
+Эти задачи научили тебя объединять знания о массивах, циклах и функциях. Важно не просто запомнить, как работает код, а понять его суть. Если ты справилась с заданиями, ты готова к следующему шагу!
