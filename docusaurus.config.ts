@@ -63,7 +63,7 @@ const config: Config = {
       title: 'Maria-js',
       logo: {
         alt: 'Тут логоВО',
-        src: 'img/logo.svg',
+        src: 'img/newyearegg.png',
       },
       items: [
         {

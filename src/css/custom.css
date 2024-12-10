@@ -28,3 +28,24 @@
   --ifm-color-solution-text: #f0f0ff; /* Текст для секций решения */
   /* Добавьте другие переменные по необходимости */
 }
+
+.main-wrapper {
+  background: url('/img/snow.svg');
+  background-position: top right; /* Например, снежинка в верхнем правом углу */
+  background-size: 580px 580px; /* Скорректируй размер, чтобы снежинка была неброской */
+}
+
+.navbar {
+  position: relative;
+}
+.navbar::after {
+  /*content: '';*/
+  position: absolute;
+  background: url('/img/newyearegg.png');
+  background-size: cover;
+  width: 48px;
+  height: 48px;
+  left: 94px;
+  top: 36px;
+  z-index: 100;
+}
