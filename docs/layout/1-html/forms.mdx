@@ -1,0 +1,613 @@
+---
+sidebar_position: 5
+---
+
+# 1.5 HTML-формы
+
+## Введение
+
+В этом уроке мы научимся создавать формы - важнейший элемент взаимодействия с пользователем на веб-страницах. Формы позволяют собирать информацию: логины, пароли, комментарии, оценки и многое другое.
+
+:::tip[Где используются формы?]
+Формы встречаются повсюду в интернете: регистрация на сайтах, поиск информации, заполнение анкет, отправка сообщений, оформление заказов и т.д.
+:::
+
+---
+
+## Основы форм
+
+Формы создаются с помощью тега `<form>`. Внутри формы размещаются различные элементы ввода: текстовые поля, кнопки, чекбоксы и другие.
+
+```html
+<form>
+  <!-- Элементы формы будут здесь -->
+</form>
+```
+
+:::warning[Атрибуты формы]
+У формы есть важные атрибуты:
+- `action` - URL, куда отправляются данные формы
+- `method` - метод отправки (GET или POST)
+
+Пока мы не будем их использовать, так как для работы с ними нужен сервер.
+:::
+
+---
+
+## Элементы формы
+
+### Текстовые поля
+
+Самый распространенный элемент формы - текстовое поле, создаваемое с помощью тега `<input>`:
+
+```html
+<input type="text" placeholder="Введите имя">
+```
+
+:::tip[Атрибуты input]
+- `type` - тип поля ввода (text, password, email и др.)
+- `placeholder` - подсказка, которая отображается в пустом поле
+- `value` - начальное значение
+- `name` - имя поля (важно при отправке данных)
+- `id` - идентификатор для связи с JavaScript
+:::
+
+### Типы полей ввода
+
+Тег `<input>` может создавать разные типы полей в зависимости от атрибута `type`:
+
+```html
+<!-- Обычное текстовое поле -->
+<input type="text" placeholder="Ваше имя">
+
+<!-- Поле для пароля (скрывает вводимые символы) -->
+<input type="password" placeholder="Пароль">
+
+<!-- Поле для email с валидацией -->
+<input type="email" placeholder="Email">
+
+<!-- Числовое поле -->
+<input type="number" placeholder="Возраст">
+
+<!-- Поле для выбора даты -->
+<input type="date">
+
+<!-- Чекбокс (флажок) -->
+<input type="checkbox"> Согласен с условиями
+
+<!-- Радиокнопка (для выбора одного варианта из нескольких) -->
+<input type="radio" name="gender" value="male"> Мужской
+<input type="radio" name="gender" value="female"> Женский
+```
+
+:::danger[Группировка радиокнопок]
+Для радиокнопок важно указывать одинаковый атрибут `name`, чтобы они работали как группа. Если у радиокнопок разные `name`, пользователь сможет выбрать несколько вариантов!
+:::
+
+### Многострочное текстовое поле
+
+Для ввода большого текста используется тег `<textarea>`:
+
+```html
+<textarea placeholder="Ваш комментарий" rows="5" cols="30"></textarea>
+```
+
+### Выпадающий список
+
+Для выбора из нескольких вариантов используется тег `<select>` с вложенными тегами `<option>`:
+
+```html
+<select>
+  <option value="apple">Яблоко</option>
+  <option value="orange">Апельсин</option>
+  <option value="banana">Банан</option>
+</select>
+```
+
+### Кнопки
+
+Для создания кнопок используется тег `<button>` или `<input type="submit">`:
+
+```html
+<!-- Обычная кнопка -->
+<button type="button">Нажми меня</button>
+
+<!-- Кнопка отправки формы -->
+<button type="submit">Отправить</button>
+
+<!-- Кнопка сброса формы -->
+<button type="reset">Очистить</button>
+```
+
+:::warning[Типы кнопок]
+По умолчанию кнопка внутри формы имеет тип `submit` и пытается отправить форму. Если нужна просто кнопка для JavaScript, указывай `type="button"`.
+:::
+
+---
+
+## Группировка элементов
+
+Для логической группировки элементов формы используются теги `<fieldset>` и `<legend>`:
+
+```html
+<fieldset>
+  <legend>Личная информация</legend>
+  <input type="text" placeholder="Имя">
+  <input type="text" placeholder="Фамилия">
+  <input type="email" placeholder="Email">
+</fieldset>
+
+<fieldset>
+  <legend>Адрес доставки</legend>
+  <input type="text" placeholder="Город">
+  <input type="text" placeholder="Улица">
+  <input type="text" placeholder="Дом">
+</fieldset>
+```
+
+---
+
+## Подписи к полям
+
+Для создания подписей к полям используется тег `<label>`. Он связывается с полем ввода через атрибут `for`, который должен совпадать с `id` поля:
+
+```html
+<label for="username">Имя пользователя:</label>
+<input type="text" id="username">
+
+<label for="agree">
+  <input type="checkbox" id="agree"> Согласен с условиями
+</label>
+```
+
+:::tip[Преимущества label]
+1. Улучшает доступность для людей с ограниченными возможностями
+2. Увеличивает область клика (можно кликнуть по тексту, чтобы активировать поле)
+3. Делает форму более понятной
+:::
+
+---
+
+## Работа с формами через JavaScript
+
+JavaScript позволяет взаимодействовать с формами: получать введенные данные, проверять их и реагировать на события.
+
+### Получение значений полей
+
+```html
+<form id="myForm">
+  <input type="text" id="username" placeholder="Имя">
+  <input type="email" id="email" placeholder="Email">
+  <button type="button" id="submitBtn">Отправить</button>
+</form>
+
+<script>
+  const submitBtn = document.getElementById('submitBtn');
+  
+  submitBtn.addEventListener('click', function() {
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    
+    console.log('Имя:', username);
+    console.log('Email:', email);
+    
+    alert('Данные формы:\nИмя: ' + username + '\nEmail: ' + email);
+  });
+</script>
+```
+
+### Событие отправки формы
+
+Можно обрабатывать событие `submit` формы:
+
+```html
+<form id="myForm">
+  <input type="text" id="username" placeholder="Имя" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <button type="submit">Отправить</button>
+</form>
+
+<script>
+  const form = document.getElementById('myForm');
+  
+  form.addEventListener('submit', function(event) {
+    // Предотвращаем стандартную отправку формы
+    event.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    
+    alert('Форма отправлена!\nИмя: ' + username + '\nEmail: ' + email);
+  });
+</script>
+```
+
+:::danger[event.preventDefault()]
+Метод `event.preventDefault()` предотвращает стандартное поведение браузера (в данном случае - отправку формы). Без него страница перезагрузится при отправке формы!
+:::
+
+### Дополнение про работу со строками
+
+В JavaScript есть несколько способов работы со строками:
+
+1. **Конкатенация** (склеивание строк с помощью `+`):
+```javascript
+const name = "Мария";
+const greeting = "Привет, " + name + "!"; // "Привет, Мария!"
+```
+
+2. **Специальные символы** в строках:
+```javascript
+const text = "Первая строка\nВторая строка"; // \n создаёт перенос строки
+alert(text);
+// Выведет:
+// Первая строка
+// Второая строка
+```
+
+3. **Шаблонные строки** (используют обратные кавычки ` `` ` и `${}`):
+```javascript
+const name = "Мария";
+const age = 25;
+const message = `Привет, ${name}!
+Тебе ${age} лет.`;
+// Можно использовать переменные внутри ${} 
+// и делать переносы строк просто нажав Enter
+```
+
+:::tip[Какой способ использовать?]
+- Для простых строк используй конкатенацию с `+`.
+
+- Если нужны переносы строк, используй `\n`.
+
+- Шаблонные строки (с `${}`) удобно использовать когда нужно использовать переменные внутри строки.
+:::
+
+
+### Работа с выпадающими списками (select)
+
+Для работы с выпадающими списками в JavaScript нужно:
+1. Получить элемент `select` через `getElementById`
+2. Использовать свойства `selectedIndex` и `options` для получения выбранного значения:
+
+```html
+<select id="fruits">
+    <option value="apple">Яблоко</option>
+    <option value="orange">Апельсин</option>
+    <option value="banana">Банан</option>
+</select>
+
+<script>
+    const select = document.getElementById('fruits');
+    
+    // Получить значение выбранного option (то что в value)
+    const value = select.value; // например, "apple"
+    
+    // Получить текст выбранного option (то что видит пользователь)
+    // selectedIndex - номер выбранного пункта
+    // options - список всех пунктов
+    // text - текст конкретного пункта
+    const text = select.options[select.selectedIndex].text; // например, "Яблоко"
+</script>
+```
+
+:::tip[Разница между value и text]
+В выпадающем списке каждый пункт имеет:
+- `value` - техническое значение для работы в JavaScript
+- `text` - текст, который видит пользователь
+Например: `<option value="apple">Яблоко</option>`
+- `value` будет "apple"
+- `text` будет "Яблоко"
+:::
+
+### Работа с радиокнопками (radio)
+
+Для работы с радиокнопками:
+1. Получить все радиокнопки через `getElementsByName` (так как у них одинаковый атрибут name)
+
+:::info[Методы поиска элементов]
+В JavaScript есть несколько методов для поиска элементов:
+- `getElementById` - находит один элемент по его id
+- `getElementsByName` - находит все элементы с указанным атрибутом name
+- `getElementsByClassName` - находит все элементы с указанным классом
+- `getElementsByTagName` - находит все элементы с указанным тегом (например, `div`, `p`, `button` и т.д.)
+
+`getElementById` возвращает один элемент или null, остальные методы возвращают массив подходящих элементов. Если не найден ни один подходящий элемент, то возвращается пустой массив.
+:::
+2. Найти выбранную кнопку через цикл:
+
+```html
+<input type="radio" name="gender" value="male" checked> Мужской
+<input type="radio" name="gender" value="female"> Женский
+
+<script>
+    const radioButtons = document.getElementsByName('gender');
+    
+    // Найти выбранную радиокнопку
+    let selectedValue = '';
+    for (let i = 0; i < radioButtons.length; i++) {
+        // Если кнопка выбрана, то её checked будет true
+        if (radioButtons[i].checked) {
+            selectedValue = radioButtons[i].value;
+            break;
+        }
+    }
+    // selectedValue будет "male" или "female"
+</script>
+```
+
+### Работа с флажками (checkbox)
+
+Для работы с флажками:
+1. Если флажок один - можно использовать `getElementById` и свойство `checked`
+2. Если флажков несколько - используем `getElementsByName` и проверяем каждый:
+
+:::tip[Строки в JavaScript]
+Строки в JavaScript - это объекты, у которых есть методы и свойства. Например, `slice` - это метод, который возвращает часть строки.
+
+Посмотреть все методы и свойства строки с примерами их использования можно [тут](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String).
+
+А [тут](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/slice) про метод `slice`. Изучи эту страницу, чтобы понять как мы убираем запятые в примере ниже.
+:::
+
+```html
+<!-- Один флажок -->
+<input type="checkbox" id="agree"> Согласен с условиями
+
+<script>
+    const checkbox = document.getElementById('agree');
+    const isChecked = checkbox.checked; // true или false
+</script>
+
+<!-- Несколько флажков -->
+<input type="checkbox" name="hobbies" value="sport"> Спорт
+<input type="checkbox" name="hobbies" value="music"> Музыка
+<input type="checkbox" name="hobbies" value="art"> Искусство
+
+<script>
+    const checkboxes = document.getElementsByName('hobbies');
+    
+    // Собираем все отмеченные значения
+    let selectedHobbies = '';
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            // если флажок отмечен, то используем его значение
+            // для добавления к строке
+            // а также добавляем запятую и пробел, чтобы разделить значения
+            // в строке, куда всё это складывается
+            if (checkboxes[i].value === 'sport') {
+                selectedHobbies += 'Спорт, ';
+            } else if (checkboxes[i].value === 'music') {
+                selectedHobbies += 'Музыка, ';
+            } else if (checkboxes[i].value === 'art') {
+                selectedHobbies += 'Искусство, ';
+            }
+        }
+    }
+    
+    // Итого в selectedHobbies будет строка, например "sport, music,"
+    // Нужно убрать последнюю запятую и пробел
+    if (selectedHobbies.length > 0) {
+        selectedHobbies = selectedHobbies.slice(0, -2);
+    } else {
+        selectedHobbies = 'Ничего не выбрано';
+    }
+    // selectedHobbies будет содержать "Спорт, Музыка" если выбраны первые два флажка
+</script>
+```
+
+:::tip[Совет]
+Для радиокнопок и флажков удобно использовать цикл `for`, чтобы проверить все элементы и найти выбранные.
+:::
+
+---
+
+## Практическое задание
+
+Создай форму заказа пиццы:
+
+1. Создай новый HTML файл с базовой структурой
+2. Добавь заголовок "Заказ пиццы"
+3. Создай форму со следующими элементами:
+   - Поле для ввода имени заказчика
+   - Выпадающий список для выбора размера пиццы (маленькая, средняя, большая)
+   - Чекбоксы для выбора топпингов (минимум 5 вариантов: грибы, сыр, пепперони, ананас, оливки)
+   - Радиокнопки для выбора типа теста (тонкое, традиционное)
+   - Текстовое поле для адреса доставки
+   - Поле для ввода номера телефона
+   - Многострочное поле для дополнительных комментариев к заказу
+   - Кнопка "Заказать"
+4. Используй теги `<fieldset>` и `<legend>` для группировки элементов
+5. Добавь подписи к полям с помощью тега `<label>`
+6. При отправке формы выведи информацию о заказе в alert
+
+<details>
+    <summary>Подсказка</summary>
+
+    ```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Заказ пиццы</title>
+</head>
+<body>
+    <h1>Заказ пиццы</h1>
+    
+    <form id="pizzaOrderForm">
+        <fieldset>
+            <legend>Информация о заказчике</legend>
+            
+            <div>
+                <label for="customerName">Ваше имя:</label>
+                <input type="text" id="customerName" placeholder="Введите ваше имя" required>
+            </div>
+            
+            <div>
+                <label for="phone">Телефон:</label>
+                <input type="tel" id="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
+            </div>
+            
+            <div>
+                <label for="address">Адрес доставки:</label>
+                <input type="text" id="address" placeholder="Улица, дом, квартира" required>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Параметры пиццы</legend>
+            
+            <div>
+                <label for="size">Размер пиццы:</label>
+                <select id="size" required>
+                    <option value="">Выберите размер</option>
+                    <option value="small">Маленькая (25 см)</option>
+                    <option value="medium">Средняя (30 см)</option>
+                    <option value="large">Большая (35 см)</option>
+                </select>
+            </div>
+            
+            <div>
+                <p>Тип теста:</p>
+                <label>
+                    <input type="radio" name="dough" value="thin" checked> Тонкое
+                </label>
+                <label>
+                    <input type="radio" name="dough" value="traditional"> Традиционное
+                </label>
+            </div>
+            
+            <div>
+                <p>Топпинги:</p>
+                <label>
+                    <input type="checkbox" name="toppings" value="cheese"> Дополнительный сыр
+                </label><br>
+                <label>
+                    <input type="checkbox" name="toppings" value="pepperoni"> Пепперони
+                </label><br>
+                <label>
+                    <input type="checkbox" name="toppings" value="mushrooms"> Грибы
+                </label><br>
+                <label>
+                    <input type="checkbox" name="toppings" value="pineapple"> Ананас
+                </label><br>
+                <label>
+                    <input type="checkbox" name="toppings" value="olives"> Оливки
+                </label>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Дополнительно</legend>
+            
+            <div>
+                <label for="comments">Комментарии к заказу:</label>
+                <textarea id="comments" placeholder="Особые пожелания к заказу" rows="3" cols="40"></textarea>
+            </div>
+        </fieldset>
+        
+        <button type="submit">Заказать</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('pizzaOrderForm');
+        
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Получаем данные заказчика
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            
+            // Получаем размер пиццы
+            const size = document.getElementById('size');
+            const sizeText = size.options[size.selectedIndex].text;
+            
+            // Получаем тип теста
+            let dough = '';
+            const doughInputs = document.getElementsByName('dough');
+            for (let i = 0; i < doughInputs.length; i++) {
+                if (doughInputs[i].checked) {
+                    dough = doughInputs[i].value;
+                    break;
+                }
+            }
+            
+            // Преобразуем значение теста в читаемый текст
+            if (dough === 'thin') {
+                dough = 'Тонкое';
+            } else {
+                dough = 'Традиционное';
+            }
+            
+            // Получаем выбранные топпинги
+            const toppingsInputs = document.getElementsByName('toppings');
+            let toppingsText = '';
+            
+            for (let i = 0; i < toppingsInputs.length; i++) {
+                if (toppingsInputs[i].checked) {
+                    // Добавляем название топпинга в зависимости от значения
+                    if (toppingsInputs[i].value === 'cheese') {
+                        toppingsText += 'Дополнительный сыр, ';
+                    } else if (toppingsInputs[i].value === 'pepperoni') {
+                        toppingsText += 'Пепперони, ';
+                    } else if (toppingsInputs[i].value === 'mushrooms') {
+                        toppingsText += 'Грибы, ';
+                    } else if (toppingsInputs[i].value === 'pineapple') {
+                        toppingsText += 'Ананас, ';
+                    } else if (toppingsInputs[i].value === 'olives') {
+                        toppingsText += 'Оливки, ';
+                    }
+                }
+            }
+            
+            // Убираем последнюю запятую и пробел, если они есть
+            if (toppingsText.length > 0) {
+                toppingsText = toppingsText.slice(0, -2);
+            } else {
+                toppingsText = 'Без дополнительных топпингов';
+            }
+            
+            const comments = document.getElementById('comments').value;
+            
+            // Формируем сообщение о заказе
+            let orderMessage = `
+Заказ пиццы принят!
+
+Информация о заказчике:
+- Имя: ${name}
+- Телефон: ${phone}
+- Адрес: ${address}
+
+Параметры пиццы:
+- Размер: ${sizeText}
+- Тесто: ${dough}
+- Топпинги: ${toppingsText}
+
+${comments ? 'Комментарий: ' + comments : 'Без комментариев'}
+
+Спасибо за заказ! Ожидайте доставку в течение 30-60 минут.
+            `;
+            
+            alert(orderMessage);
+        });
+    </script>
+</body>
+</html>
+    ```
+
+</details>
+
+---
+
+## Итоги
+
+В этом уроке ты научилась:
+- Создавать HTML-формы
+- Использовать различные типы полей ввода
+- Группировать элементы формы
+- Добавлять подписи к полям
+- Обрабатывать отправку формы с помощью JavaScript
+- Получать и использовать данные из формы
+
+В следующем уроке мы начнём изучать CSS, чтобы сделать наши страницы красивыми! 
