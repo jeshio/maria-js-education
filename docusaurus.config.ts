@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -63,7 +63,7 @@ const config: Config = {
       title: 'Maria-js',
       logo: {
         alt: 'Тут логоВО',
-        src: 'img/newyearegg.png',
+        src: 'img/logo.svg',
       },
       items: [
         {
@@ -72,7 +72,7 @@ const config: Config = {
           position: 'left',
           label: 'Учить тут!',
         },
-        {to: '/blog', label: 'Обновления', position: 'left'},
+        { to: '/blog', label: 'Обновления', position: 'left' },
         {
           href: 'https://github.com/jeshio/maria-js-education/',
           label: 'GitHub',

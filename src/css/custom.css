@@ -3,14 +3,22 @@
 
 /* Светлая тема: Розовые оттенки */
 :root {
-  --ifm-color-primary: #ff69b4; /* Основной цвет */
-  --ifm-color-secondary: #ffb6c1; /* Вторичный цвет */
-  --ifm-background-color: #fff6f9; /* Фон */
-  --ifm-color-code-background: #ffe4e1; /* Фон кода */
-  --ifm-color-output-bg: #ffe4e1; /* Фон для секций результата */
-  --ifm-color-output-text: #333333; /* Текст для секций результата */
-  --ifm-color-solution-bg: #ffe4e1; /* Фон для секций решения */
-  --ifm-color-solution-text: #333333; /* Текст для секций решения */
+  --ifm-color-primary: #ff69b4;
+  /* Основной цвет */
+  --ifm-color-secondary: #ffb6c1;
+  /* Вторичный цвет */
+  --ifm-background-color: #fff6f9;
+  /* Фон */
+  --ifm-color-code-background: #ffe4e1;
+  /* Фон кода */
+  --ifm-color-output-bg: #ffe4e1;
+  /* Фон для секций результата */
+  --ifm-color-output-text: #333333;
+  /* Текст для секций результата */
+  --ifm-color-solution-bg: #ffe4e1;
+  /* Фон для секций решения */
+  --ifm-color-solution-text: #333333;
+  /* Текст для секций решения */
 
   --ifm-heading-font-family: "Montserrat", sans-serif;
   --ifm-font-family-base: "Open Sans", sans-serif;
@@ -18,34 +26,70 @@
 
 /* Темная тема: Мистические фиолетовые оттенки */
 :root[data-theme='dark'] {
-  --ifm-color-primary: #d070ff; /* Основной цвет */
-  --ifm-color-secondary: #60bcff; /* Вторичный цвет */
-  --ifm-background-color: #2f2f4f; /* Фон */
-  --ifm-color-code-background: #4b0082; /* Фон кода */
-  --ifm-color-output-bg: #6a5acd; /* Фон для секций результата */
-  --ifm-color-output-text: #f0f0ff; /* Текст для секций результата */
-  --ifm-color-solution-bg: #6a5acd; /* Фон для секций решения */
-  --ifm-color-solution-text: #f0f0ff; /* Текст для секций решения */
+  --ifm-color-primary: #d070ff;
+  /* Основной цвет */
+  --ifm-color-secondary: #60bcff;
+  /* Вторичный цвет */
+  --ifm-background-color: #2f2f4f;
+  /* Фон */
+  --ifm-color-code-background: #4b0082;
+  /* Фон кода */
+  --ifm-color-output-bg: #6a5acd;
+  /* Фон для секций результата */
+  --ifm-color-output-text: #f0f0ff;
+  /* Текст для секций результата */
+  --ifm-color-solution-bg: #6a5acd;
+  /* Фон для секций решения */
+  --ifm-color-solution-text: #f0f0ff;
+  /* Текст для секций решения */
   /* Добавьте другие переменные по необходимости */
 }
 
 .main-wrapper {
-  background: url('/img/snow.svg');
-  background-position: top right; /* Например, снежинка в верхнем правом углу */
-  background-size: 580px 580px; /* Скорректируй размер, чтобы снежинка была неброской */
+  background-position: top right;
+  background-size: 580px 580px;
+}
+
+/* Анимированные элементы для создания эффекта "цветущего сада" */
+.main-wrapper::before,
+.main-wrapper::after {
+  content: '🌸';
+  position: fixed;
+  font-size: 20px;
+  opacity: 0.4;
+  animation: float 20s linear infinite;
+  z-index: -1;
+}
+
+.main-wrapper::before {
+  top: 20%;
+  left: 10%;
+  animation-delay: -5s;
+}
+
+.main-wrapper::after {
+  top: 60%;
+  right: 10%;
+  animation-delay: -10s;
+}
+
+/* Анимация плавающих элементов */
+@keyframes float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: translate(100px, -100px) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 .navbar {
   position: relative;
-}
-.navbar::after {
-  /*content: '';*/
-  position: absolute;
-  background: url('/img/newyearegg.png');
-  background-size: cover;
-  width: 48px;
-  height: 48px;
-  left: 94px;
-  top: 36px;
-  z-index: 100;
 }

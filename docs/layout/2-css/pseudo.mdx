@@ -1,0 +1,316 @@
+---
+sidebar_position: 3
+---
+
+# 2.3 Псевдоклассы и псевдоэлементы
+
+В этом уроке мы изучим специальные селекторы CSS, которые позволяют стилизовать элементы в зависимости от их состояния или добавлять новые части к элементам.
+
+## Псевдоклассы
+
+### Что такое псевдоклассы
+
+__Псевдоклассы__ - это специальные ключевые слова, которые добавляются к селекторам и позволяют стилизовать элементы в особых состояниях или при определённых условиях. Они называются "псевдо" (от греч. "ложный", "мнимый"), потому что они не являются реальными классами в HTML-разметке, а представляют собой виртуальные классы, которые браузер определяет автоматически.
+
+- Псевдоклассы начинаются с двоеточия (`:`) и добавляются к селектору без пробелов
+- Позволяют выбирать элементы в определённом состоянии
+
+### Примеры псевдоклассов
+
+#### Состояния ссылок
+
+```css
+/* Непосещённая ссылка */
+a:link {
+  color: blue;
+}
+
+/* Посещённая ссылка */
+a:visited {
+  color: purple;
+}
+
+/* При наведении мыши */
+a:hover {
+  color: red;
+}
+
+/* При нажатии */
+a:active {
+  color: orange;
+}
+```
+
+#### Состояния форм
+
+```css
+/* Поле в фокусе */
+input:focus {
+  border-color: blue;
+}
+
+/* Отключенное поле */
+input:disabled {
+  background-color: #eee;
+}
+
+/* Отмеченный чекбокс */
+input:checked {
+  outline: 2px solid green;
+}
+```
+
+### Псевдокласс :has()
+
+Позволяет выбрать элемент, если он содержит определённый дочерний элемент:
+
+```css
+/* Метка, содержащая обязательное поле */
+label:has(input[required]) {
+  font-weight: bold;
+}
+
+/* Div, содержащий изображение */
+div:has(img) {
+  padding: 10px;
+}
+```
+
+```html
+<label>
+  <input type="text" required>
+</label>
+<div>
+  <img src="image.jpg" alt="Картинка">
+</div>
+```
+
+
+:::tip[Поддержка браузерами]
+Псевдокласс :has() относительно новый и поддерживается не всеми браузерами. По ситуации используйте [caniuse.com](https://caniuse.com) для проверки поддержки.
+:::
+
+### Позиционные псевдоклассы
+
+```css
+/* Первый элемент */
+li:first-child {
+  font-weight: bold;
+}
+
+/* Последний элемент */
+li:last-child {
+  color: red;
+}
+
+/* Каждый нечётный элемент */
+li:nth-child(odd) {
+  background-color: gray;
+}
+
+/* Каждый чётный элемент */
+li:nth-child(even) {
+  background-color: yellow;
+}
+
+/* Каждый третий элемент */
+li:nth-child(3n) {
+  color: blue;
+}
+```
+
+```html
+<ul>
+  <li>Жирный шрифт, серый фон</li>
+  <li>Жёлтый фон</li>
+  <li>Синий цвет, серый фон</li>
+  <li>Красный цвет, жёлтый фон</li>
+</ul>
+```
+
+## Псевдоэлементы
+
+Псевдоэлементы позволяют добавлять или стилизовать части элементов:
+
+### ::before и ::after
+
+Добавляют контент до или после содержимого элемента:
+
+```css
+.quote::before {
+  content: "«";
+  color: gray;
+}
+
+.quote::after {
+  content: "»";
+  color: gray;
+}
+```
+
+```html
+<p class="quote">Это цитата</p>
+<!-- Отобразится как: «Это цитата» -->
+```
+
+### ::first-letter и ::first-line
+
+Стилизуют первую букву или строку текста:
+
+```css
+p::first-letter {
+  font-size: 2em;
+  color: red;
+}
+
+p::first-line {
+  font-style: italic;
+}
+```
+
+:::tip[Двойное двоеточие]
+Псевдоэлементы используют двойное двоеточие (::), чтобы отличать их от псевдоклассов (:).
+:::
+
+## Практическое задание
+
+Создай интерактивную форму регистрации:
+
+1. Создай файл `form.html`:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Форма регистрации</title>
+  <link rel="stylesheet" href="form.css">
+</head>
+<body>
+  <form class="registration">
+    <h2>Регистрация</h2>
+    
+    <div class="form-group">
+      <label for="username">Имя пользователя</label>
+      <input type="text" id="username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Пароль</label>
+      <input type="password" id="password" required>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="checkbox" required>
+        Я согласен с условиями
+      </label>
+    </div>
+
+    <button type="submit">Зарегистрироваться</button>
+  </form>
+</body>
+</html>
+```
+
+2. Создай файл `form.css` и добавь стили, используя псевдоклассы и псевдоэлементы:
+- Стилизуй поля формы в разных состояниях (focus, disabled)
+- Добавь звёздочку через ::after для обязательных полей
+- Используй :hover для интерактивности
+- Стилизуй чекбокс в состоянии :checked
+
+<details>
+  <summary>Подсказка</summary>
+
+  ```css
+  .registration {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  /* Добавляем звёздочку для обязательных полей */
+  input[required] + label::after,
+  label:has(input[required])::after {
+    content: "*";
+    color: red;
+    margin-left: 5px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  /* Стили для полей в фокусе */
+  input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+  }
+
+  /* Стили для отключенных полей */
+  input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }
+
+  /* Стили для кнопки */
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  button:active {
+    background-color: #004085;
+  }
+
+  /* Стили для чекбокса */
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  input[type="checkbox"]:checked + label {
+    color: #007bff;
+  }
+  ```
+</details>
+
+---
+
+## Итоги
+
+В этом уроке ты научилась:
+- Использовать псевдоклассы для стилизации элементов в разных состояниях
+- Применять позиционные псевдоклассы
+- Работать с псевдоэлементами ::before и ::after
+- Создавать интерактивные формы с помощью CSS
+
+В следующем уроке мы изучим приоритеты стилей в CSS! 
