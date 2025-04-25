@@ -1,0 +1,160 @@
+---
+sidebar_position: 8
+---
+
+# 2.8 Flexbox: основы современного выравнивания
+
+В этом уроке я расскажу тебе про Flexbox — очень удобный способ выравнивать и располагать элементы на странице. С ним верстать макеты становится намного проще!
+
+## Что такое Flexbox
+
+Flexbox (Flexible Box Layout — по-русски можно перевести как "гибкая коробочная модель" или "гибкий контейнер") — это специальный режим отображения, который позволяет легко выстраивать элементы в ряд, делать адаптивные сетки, выравнивать по центру и распределять пространство между элементами.
+
+Название говорит само за себя: flex — значит "гибкий", а box — "коробка" или "контейнер". То есть, Flexbox — это способ гибко управлять расположением "коробочек" (элементов) на странице.
+
+Чтобы включить Flexbox, нужно задать родителю свойство `display: flex;`:
+
+```css
+.container {
+  display: flex;
+}
+```
+
+## Основные свойства для контейнера
+
+- `flex-direction` — направление расположения элементов:
+  - `row` — по горизонтали (по умолчанию)
+  - `column` — по вертикали
+
+- `justify-content` — выравнивание по главной оси:
+  - `flex-start` — к началу (по умолчанию)
+  - `flex-end` — к концу
+  - `center` — по центру
+  - `space-between` — равномерно, крайние элементы у краёв
+  - `space-around` — равномерно, с отступами по краям
+  - `space-evenly` — равномерно, одинаковые отступы между всеми
+
+- `align-items` — выравнивание по поперечной оси:
+  - `stretch` — растянуть по высоте (по умолчанию)
+  - `flex-start` — к началу контейнера
+  - `flex-end` — к концу контейнера
+  - `center` — по центру
+
+- `gap` — расстояние между элементами (можно задать в px, em и т.д.)
+
+### Пример горизонтального меню
+
+```css
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 16px;
+}
+```
+
+```html
+<nav class="menu">
+  <a href="#">Главная</a>
+  <a href="#">О нас</a>
+  <a href="#">Контакты</a>
+</nav>
+```
+
+### Пример вертикального выравнивания
+
+```css
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+```
+
+```html
+<aside class="sidebar">
+  <button>Профиль</button>
+  <button>Сообщения</button>
+  <button>Выйти</button>
+</aside>
+```
+
+### Пример равномерного распределения
+
+```css
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+```
+
+```html
+<div class="toolbar">
+  <span>Лого</span>
+  <input type="text" placeholder="Поиск" />
+  <button>Войти</button>
+</div>
+```
+
+## Практическое задание
+
+Попробуй сверстать строку из трёх карточек, которые красиво выравниваются по центру и имеют одинаковые отступы между собой:
+
+1. Создай файл `flexbox.html`:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flexbox</title>
+  <link rel="stylesheet" href="flexbox.css">
+</head>
+<body>
+  <div class="flex-container">
+    <div class="card">Карточка 1</div>
+    <div class="card">Карточка 2</div>
+    <div class="card">Карточка 3</div>
+  </div>
+</body>
+</html>
+```
+
+2. Создай файл `flexbox.css` и добавь стили:
+
+<details>
+<summary>Показать пример ответа</summary>
+
+```css
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.card {
+  background: #e3f2fd;
+  padding: 32px 24px;
+  border-radius: 12px;
+  min-width: 120px;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.08);
+}
+```
+
+</details>
+
+---
+
+## Итоги
+
+Теперь ты умеешь:
+- Включать flex-контейнер и управлять направлением
+- Выравнивать элементы по центру и по краям
+- Использовать gap для отступов между элементами
+- Делать адаптивные ряды карточек
+
+В следующем уроке я расскажу тебе про продвинутые возможности Flexbox: как делать сложные сетки, выделять отдельные элементы, управлять порядком и размером! 

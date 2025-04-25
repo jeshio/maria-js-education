@@ -1,0 +1,162 @@
+---
+sidebar_position: 9
+---
+
+# 2.9 Flexbox: продвинутые возможности
+
+В этом уроке я покажу тебе, как с помощью Flexbox можно делать более сложные и интересные макеты: выделять отдельные элементы, управлять их порядком и размером.
+
+## Свойства для элементов внутри flex-контейнера
+
+- `flex-grow` — как элемент будет растягиваться, чтобы занять свободное место:
+  - `0` — не растягивается (по умолчанию)
+  - `1` — растягивается, чтобы занять всё доступное пространство
+
+- `flex-shrink` — как элемент будет сжиматься, если не хватает места:
+  - `1` — сжимается (по умолчанию)
+  - `0` — не сжимается
+
+- `flex-basis` — базовый размер элемента (например, `200px`, `20%`, `auto`)
+
+- `order` — порядок отображения (по умолчанию 0, можно задать любое число)
+
+:::tip[В чём разница между flex-basis и width?]
+`flex-basis` задаёт базовый размер элемента именно для flex-контейнера и работает вместе с flex-grow и flex-shrink. Если указаны оба свойства (`width` и `flex-basis`), то в flex-контейнере приоритет будет у `flex-basis`.
+
+Например:
+```css
+.card {
+  width: 300px;
+  flex-basis: 200px;
+}
+```
+В этом случае ширина карточки в flex-контейнере будет 200px, а не 300px. Поэтому для гибких макетов лучше использовать `flex-basis`.
+:::
+
+### Пример: одна карточка шире других
+
+```css
+.card {
+  flex-grow: 1;
+}
+.card.featured {
+  flex-grow: 2;
+}
+```
+
+```html
+<div class="flex-container">
+  <div class="card">Обычная</div>
+  <div class="card featured">Особенная</div>
+  <div class="card">Обычная</div>
+</div>
+```
+
+### Пример: прижать кнопку к правому краю
+
+```css
+.toolbar {
+  display: flex;
+}
+.button {
+  margin-left: auto;
+}
+```
+
+```html
+<div class="toolbar">
+  <span>Меню</span>
+  <button class="button">Выйти</button>
+</div>
+```
+
+### Пример: адаптивная карточка
+
+```css
+.card {
+  flex-basis: 200px;
+  flex-grow: 1;
+  min-width: 120px;
+}
+```
+
+```html
+<div class="flex-container">
+  <div class="card">Карточка 1</div>
+  <div class="card">Карточка 2</div>
+  <div class="card">Карточка 3</div>
+</div>
+```
+
+## Практическое задание
+
+Попробуй сверстать макет страницы с помощью Flexbox:
+
+1. Сделай три основные части: хедер (шапка), сайдбар (слева) и основную контентную область (справа).
+2. Хедер должен быть сверху на всю ширину, под ним — основной flex-контейнер с сайдбаром и контентом.
+3. Сайдбар пусть будет фиксированной ширины, а контентная часть — растягивается на всё оставшееся место.
+4. Используй flex-grow, flex-basis, order и другие свойства для управления размером и порядком элементов.
+
+<details>
+<summary>Показать пример ответа</summary>
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flexbox макет</title>
+  <link rel="stylesheet" href="flex-layout.css">
+</head>
+<body>
+  <header class="header">Хедер сайта</header>
+  <div class="main-layout">
+    <aside class="sidebar">Сайдбар</aside>
+    <main class="content">Контентная часть. Здесь может быть текст, картинки, карточки и всё, что угодно!</main>
+  </div>
+</body>
+</html>
+```
+
+```css
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+.header {
+  background: #2196f3;
+  color: #fff;
+  padding: 24px;
+  font-size: 16px;
+  text-align: center;
+}
+.main-layout {
+  display: flex;
+  min-height: 400px;
+}
+.sidebar {
+  background: #e3f2fd;
+  flex-basis: 200px;
+  flex-shrink: 0;
+  padding: 24px 16px;
+  font-size: 14px;
+}
+.content {
+  background: #fff;
+  flex-grow: 1;
+  padding: 32px 24px;
+  font-size: 14px;
+}
+```
+
+</details>
+
+---
+
+## Итоги
+
+Теперь ты умеешь:
+- Управлять размером и порядком элементов внутри flex-контейнера
+- Делать сложные и адаптивные макеты
+- Использовать flex-grow, flex-basis, order для выделения и выравнивания
+
+В следующем уроке я расскажу тебе про CSS Grid — ещё один мощный инструмент для построения сеток! 
