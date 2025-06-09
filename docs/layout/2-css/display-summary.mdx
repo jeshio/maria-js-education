@@ -1,0 +1,172 @@
+---
+sidebar_position: 11
+---
+
+# 2.11 Какой display выбрать? Итоги
+
+В этом уроке мы подведём итог и разберёмся, когда и какой display использовать для разных задач. Это поможет тебе уверенно верстать макеты из Figma и не путаться в типах элементов!
+
+## Краткое повторение: основные значения display
+
+- `block` — блочный элемент, занимает всю ширину, начинается с новой строки
+- `inline` — строчный элемент, идёт в одну линию с другими, ширина по содержимому
+- `inline-block` — строчно-блочный: идёт в строку, но можно задать ширину и высоту
+- `flex` — flex-контейнер для выравнивания и распределения элементов в одну строку или столбец
+- `grid` — grid-контейнер для создания сложных сеток
+- `none` — элемент не отображается
+
+## Когда использовать каждый тип?
+
+| display        | Когда использовать?                                      |
+|---------------|----------------------------------------------------------|
+| block         | Секции, карточки, контейнеры, заголовки, параграфы       |
+| inline        | Текст, иконки, отдельные слова, ссылки                   |
+| inline-block  | Кнопки, бейджи, элементы в строку с размерами           |
+| flex          | Меню, панели, ряды карточек, выравнивание по центру      |
+| grid          | Галереи, таблицы, сложные сетки, адаптивные макеты       |
+| none          | Временное скрытие элементов                              |
+
+## Примеры типовых задач
+
+- **Меню из кнопок в одну строку** — `flex`
+- **Галерея карточек с несколькими рядами** — `grid`
+- **Кнопка с иконкой** — `inline-block` для кнопки, `inline` для иконки
+- **Скрыть всплывающее окно** — `none`
+- **Текстовый абзац** — `block`
+- **Бейдж рядом с текстом** — `inline-block`
+
+## Как выбирать display для макета из Figma?
+
+1. Посмотри, как элементы расположены: в ряд, в столбик, сеткой?
+2. Если всё в одну линию — скорее всего подойдёт `flex`.
+3. Если нужна сетка с колонками и рядами — используй `grid`.
+4. Для простых блоков и секций — `block`.
+5. Для текста, иконок, ссылок — `inline`.
+6. Если элемент должен быть в строке, но с размерами — `inline-block`.
+7. Если элемент должен исчезать — `none`.
+
+:::tip[Совет]
+Не бойся комбинировать разные display! Например, внутри grid-контейнера можно использовать flex для выравнивания содержимого ячейки.
+:::
+
+## Практическое задание
+
+Сверстай макет страницы, в котором ты обязательно используешь все основные виды display:
+
+1. Создай файл `display-summary.html` с такой структурой:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Практика display</title>
+  <link rel="stylesheet" href="display-summary.css">
+</head>
+<body>
+  <header class="header">Хедер сайта</header>
+  <nav class="menu">
+    <button class="menu-btn">Главная</button>
+    <button class="menu-btn">О нас</button>
+    <button class="menu-btn">Контакты</button>
+  </nav>
+  <main>
+    <div class="grid">
+      <div class="card">Карточка 1</div>
+      <div class="card">Карточка 2</div>
+      <div class="card">Карточка 3</div>
+      <div class="card">Карточка 4</div>
+    </div>
+    <p>Это обычный абзац текста. <span class="badge">New!</span></p>
+    <button class="icon-btn">Купить <span class="icon">🛒</span></button>
+    <div class="hidden-block">Этот блок не должен быть виден</div>
+  </main>
+  <footer class="footer">Футер сайта</footer>
+</body>
+</html>
+```
+
+2. Создай файл `display-summary.css` и добавь стили с применением всех значений display.
+
+<details>
+<summary>Показать пример стилей</summary>
+
+```css
+.header, .footer {
+  display: block;
+  background: #2196f3;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+.menu {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 24px 0;
+}
+.menu-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #e3f2fd;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.08);
+  padding: 24px;
+  text-align: center;
+}
+.badge {
+  display: inline-block;
+  background: #ffecb3;
+  color: #ff6f00;
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin-left: 8px;
+  font-size: 0.9em;
+}
+.icon-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 18px;
+  background: #388e3c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+}
+.icon {
+  display: inline;
+  margin-left: 6px;
+}
+.hidden-block {
+  display: none;
+}
+p {
+  display: block;
+  margin: 24px 0 0 0;
+}
+```
+
+</details>
+
+---
+
+## Итоги
+
+Теперь ты умеешь:
+- Отличать основные типы display
+- Осознанно выбирать display для разных задач
+- Применять display для верстки макетов из Figma и реальных проектов
+
+Ты большая молодец! Дальше тебя ждут ещё более интересные темы! 

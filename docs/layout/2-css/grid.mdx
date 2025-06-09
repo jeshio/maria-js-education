@@ -1,0 +1,143 @@
+---
+sidebar_position: 10
+---
+
+# 2.10 CSS Grid: современная сетка для макетов
+
+В этом уроке я расскажу тебе про CSS Grid — мощный инструмент для создания сложных и красивых сеток на странице. С ним можно легко делать галереи, карточки, таблицы и любые другие макеты!
+
+## Что такое CSS Grid
+
+CSS Grid (Grid Layout) — это система, которая позволяет разбивать пространство на строки и колонки и размещать элементы в виде сетки. Если Flexbox — это про выравнивание в одну линию, то Grid — про работу с двухмерной сеткой (по горизонтали и вертикали одновременно).
+
+Чтобы включить Grid, нужно задать родителю свойство `display: grid;`:
+
+```css
+grid-container {
+  display: grid;
+}
+```
+
+## Основные свойства для сетки
+
+- `grid-template-columns` — сколько и какие будут колонки:
+  - Например: `grid-template-columns: 1fr 2fr 1fr;` (три колонки: первая и третья по 1 части, вторая — в 2 раза шире)
+  - Можно использовать фиксированные значения: `grid-template-columns: 200px 1fr 2fr;`
+
+:::tip[Что такое fr?]
+`fr` — это специальная единица измерения в CSS Grid, которая означает "доля свободного пространства". Например, если ты напишешь `grid-template-columns: 1fr 2fr 1fr;`, то вторая колонка будет в 2 раза шире первой и третьей, а всё свободное место поделится между ними в этих пропорциях.
+:::
+
+- `grid-template-rows` — сколько и какие будут строки
+- `gap` — расстояние между ячейками (аналог gap в flex)
+- `justify-items` — выравнивание элементов по горизонтали внутри ячейки
+- `align-items` — выравнивание по вертикали внутри ячейки
+
+### Пример: простая сетка из карточек
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+```
+
+```html
+<div class="grid">
+  <div class="card">1</div>
+  <div class="card">2</div>
+  <div class="card">3</div>
+  <div class="card">4</div>
+  <div class="card">5</div>
+  <div class="card">6</div>
+</div>
+```
+
+### Пример: сетка с разными размерами колонок
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+}
+```
+
+### Пример: выравнивание элементов в ячейках
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  justify-items: center;
+  align-items: end;
+}
+```
+
+## Практическое задание
+
+Попробуй сверстать сетку из карточек:
+
+1. Создай файл `grid.html`:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Grid</title>
+  <link rel="stylesheet" href="grid.css">
+</head>
+<body>
+  <div class="grid">
+    <div class="card">Карточка 1</div>
+    <div class="card">Карточка 2</div>
+    <div class="card">Карточка 3</div>
+    <div class="card">Карточка 4</div>
+    <div class="card">Карточка 5</div>
+    <div class="card">Карточка 6</div>
+  </div>
+</body>
+</html>
+```
+
+2. Создай файл `grid.css` и добавь стили:
+- Сделай три колонки одинаковой ширины
+- Добавь отступы между карточками
+- Попробуй поменять количество колонок на 2 или 4 и посмотри, как меняется сетка
+
+<details>
+<summary>Показать пример ответа</summary>
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+.card {
+  background: #e3f2fd;
+  padding: 32px 24px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.1em;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.08);
+}
+```
+
+</details>
+
+---
+
+## Итоги
+
+Теперь ты умеешь:
+- Включать grid-контейнер и задавать колонки/строки
+- Делать сетки из карточек с разным количеством колонок
+- Использовать gap и выравнивание в ячейках
+
+В следующем уроке мы подведём итог и разберёмся, когда и какой display использовать для разных задач! 

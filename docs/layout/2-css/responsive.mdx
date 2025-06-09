@@ -1,0 +1,543 @@
+---
+sidebar_position: 13
+---
+
+# 2.13 Адаптивная вёрстка (responsive design)
+
+В этом уроке я расскажу тебе, как делать сайты, которые красиво выглядят на любом устройстве — от телефона до большого монитора! Это очень важная тема в современной веб-разработке.
+
+## Что такое адаптивная вёрстка
+
+Адаптивная вёрстка (responsive design) — это подход к созданию сайтов, при котором дизайн автоматически подстраивается под размер экрана устройства. Твой сайт должен одинаково хорошо работать на:
+
+- **Мобильных телефонах** (320px - 768px)
+- **Планшетах** (768px - 1024px) 
+- **Ноутбуках и десктопах** (1024px и больше)
+
+## Единицы измерения для адаптивности
+
+### Относительные единицы
+
+- `%` — процент от родительского элемента
+- `em` — относительно размера шрифта текущего элемента
+- `rem` — относительно размера шрифта корневого элемента (html)
+- `vw` — процент от ширины окна браузера (viewport width)
+- `vh` — процент от высоты окна браузера (viewport height)
+
+```css
+.container {
+  width: 90%; /* 90% от ширины родителя */
+  max-width: 1200px; /* но не больше 1200px */
+}
+
+.hero {
+  height: 50vh; /* половина высоты экрана */
+}
+
+.title {
+  font-size: 2rem; /* в 2 раза больше базового шрифта */
+}
+```
+
+:::tip[Когда что использовать]
+- `%` — для ширины контейнеров и колонок
+- `rem` — для размеров шрифтов и отступов
+- `vw/vh` — для полноэкранных секций
+- `px` — только для очень мелких деталей (границы 1px)
+:::
+
+:::info[Почему так много единиц измерения?]
+Каждая единица измерения решает свою задачу:
+
+- **Фиксированные** (`px`) — когда размер должен быть точным, не зависеть от окружения
+- **Относительные** (`%`, `em`) — когда элемент должен масштабироваться вместе с родителем
+- **Корневые** (`rem`) — когда нужно масштабирование от одного источника (удобно для accessibility)
+- **Viewport** (`vw`, `vh`) — когда размер должен зависеть от размера окна браузера
+
+Это даёт гибкость: можешь сделать кнопку фиксированного размера, но отступы — адаптивными, а шрифт — масштабируемым для людей с плохим зрением.
+:::
+
+:::info[В реальных проектах]
+    В реальных проектах зачастую ограничиваются использованием `px` и `%`, так как это самые простые и понятные единицы измерения.
+    
+    Но если ты хочешь сделать сайт более адаптированным, в том числе для людей с плохим зрением, то лучше использовать `rem` и `vw/vh`. Поэтому стоит сразу выработать хорошую привычку и не забывать о них.
+:::
+
+### Пример с относительными единицами
+
+```css
+.card {
+  width: 100%;
+  max-width: 300px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+```
+
+## Media queries — основа адаптивности
+
+Media queries позволяют применять разные стили в зависимости от размера экрана:
+
+```css
+/* Стили для всех экранов */
+.container {
+  padding: 1rem;
+}
+
+/* Стили для экранов шире 768px */
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+/* Стили для экранов шире 1024px */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+```
+
+### Типичные breakpoints (точки излома)
+
+```css
+/* Мобильные (по умолчанию) */
+.grid {
+  display: block;
+}
+
+/* Планшеты */
+@media (min-width: 768px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Десктоп */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+```
+
+:::info[Breakpoints в разных проектах]
+Breakpoints могут отличаться в зависимости от проекта:
+
+**Типовые наборы:**
+- **Bootstrap**: 576px, 768px, 992px, 1200px, 1400px
+- **Tailwind CSS**: 640px, 768px, 1024px, 1280px, 1536px
+- **Material Design**: 600px, 960px, 1280px, 1920px
+
+**Почему breakpoints разные?**
+- Дизайн и контент определяют, где нужны "переломы"
+- Аудитория проекта (если больше мобильных пользователей — меньше desktop-breakpoints)
+- Особенности интерфейса (сложные таблицы требуют больше места)
+
+Главное — выбрать breakpoints под свой проект и использовать их последовательно!
+:::
+
+:::tip[Как тестировать breakpoints в браузере]
+**В Chrome/Firefox:**
+1. Открой инструменты разработчика (Command+Option+I)
+2. Нажми на иконку "Toggle device toolbar"
+3. Выбери устройство или задай свой размер экрана
+4. Меняй ширину экрана и смотри, как адаптируется сайт
+
+**Полезные размеры для тестирования:**
+- iPhone: 375px
+- iPad: 768px  
+- Laptop: 1366px
+- Desktop: 1920px
+- Ultra Wide: 2560px
+
+Также можешь просто изменять размер окна браузера, перетаскивая его край!
+:::
+
+## Подход Mobile-first
+
+**Mobile-first** означает, что ты сначала пишешь стили для мобильных устройств, а потом добавляешь стили для больших экранов:
+
+```css
+/* Базовые стили для мобильных */
+.menu {
+  display: block;
+}
+
+.menu-item {
+  display: block;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Для больших экранов */
+@media (min-width: 768px) {
+  .menu {
+    display: flex;
+  }
+  
+  .menu-item {
+    border-bottom: none;
+    border-right: 1px solid #eee;
+  }
+}
+```
+
+:::tip[Почему mobile-first?]
+1. Большинство пользователей заходят с мобильных устройств
+2. Проще добавлять сложность, чем убирать её
+3. Быстрее загружается на мобильных (меньше кода)
+:::
+
+## Практические примеры
+
+### Пример 1: Адаптивная сетка карточек
+
+```css
+.cards {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Мобильные: одна колонка */
+.card {
+  background: #f5f5f5;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+/* Планшеты: две колонки */
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+}
+
+/* Десктоп: три колонки */
+@media (min-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+```
+
+### Пример 2: Адаптивная навигация
+
+```css
+.header {
+  padding: 1rem;
+  background: #2196f3;
+  color: white;
+}
+
+.nav {
+  display: block;
+}
+
+.nav-item {
+  display: block;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+/* Для больших экранов */
+@media (min-width: 768px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .nav-item {
+    padding: 0;
+  }
+}
+```
+
+### Пример 3: Адаптивная типографика
+
+```css
+.title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Для больших экранов увеличиваем шрифты */
+@media (min-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .text {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 2.5rem;
+  }
+}
+```
+
+## Мета-тег viewport
+
+Обязательно добавь в `<head>` твоего HTML этот тег, чтобы адаптивность работала:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+Без него мобильные браузеры будут показывать сайт так, как будто экран большой!
+
+## Практическое задание
+
+Создай адаптивную страницу с карточками товаров:
+
+1. Создай файл `responsive.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адаптивная страница</title>
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Магазин</div>
+    <nav class="nav">
+      <a href="#" class="nav-item">Главная</a>
+      <a href="#" class="nav-item">Каталог</a>
+      <a href="#" class="nav-item">Контакты</a>
+    </nav>
+  </header>
+
+  <main class="main">
+    <h1 class="title">Наши товары</h1>
+    
+    <div class="cards">
+      <div class="card">
+        <h3>Товар 1</h3>
+        <p>Описание первого товара</p>
+        <div class="price">1000 ₽</div>
+      </div>
+      <div class="card">
+        <h3>Товар 2</h3>
+        <p>Описание второго товара</p>
+        <div class="price">1500 ₽</div>
+      </div>
+      <div class="card">
+        <h3>Товар 3</h3>
+        <p>Описание третьего товара</p>
+        <div class="price">2000 ₽</div>
+      </div>
+      <div class="card">
+        <h3>Товар 4</h3>
+        <p>Описание четвертого товара</p>
+        <div class="price">2500 ₽</div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+```
+
+2. Создай файл `responsive.css` с адаптивными стилями:
+- Используй mobile-first подход
+- Сделай 1 колонку на мобильных, 2 на планшетах, 3-4 на десктопе
+- Адаптируй размеры шрифтов и отступов
+
+<details>
+<summary>Показать пример ответа</summary>
+
+```css
+/* Сброс стандартных отступов */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Шапка - мобильные */
+.header {
+  background: #2196f3;
+  color: white;
+  padding: 1rem;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Основной контент */
+.main {
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Карточки - мобильные (одна колонка) */
+.cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  color: #2196f3;
+}
+
+.card p {
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+/* Планшеты и больше */
+@media (min-width: 768px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+  }
+  
+  .logo {
+    margin-bottom: 0;
+  }
+  
+  .nav {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  
+  .main {
+    padding: 2rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Две колонки на планшетах */
+  .cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 1024px) {
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  /* Три колонки на десктопах */
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .card {
+    padding: 2rem;
+  }
+}
+
+/* Очень большие экраны */
+@media (min-width: 1400px) {
+  /* Четыре колонки на больших мониторах */
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+```
+
+</details>
+
+---
+
+## Итоги
+
+Теперь ты умеешь:
+- Использовать относительные единицы измерения (%, rem, vw, vh)
+- Создавать media queries для разных размеров экранов
+- Применять подход mobile-first
+- Делать адаптивные сетки и навигацию
+- Правильно настраивать viewport
+
+Адаптивная вёрстка — это основа современного веб-дизайна. Теперь твои сайты будут отлично выглядеть на любых устройствах! 
