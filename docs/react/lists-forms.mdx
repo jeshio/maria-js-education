@@ -1,0 +1,458 @@
+---
+sidebar_position: 4
+---
+
+import LiveCodeEditor from '@site/src/components/LiveCodeEditor';
+
+# 1.4 Списки и формы в React 📝
+
+Привет! В прошлом уроке мы изучили основы компонентов, props и state. Сегодня мы научимся работать со **списками данных** и **формами** — двумя важнейшими элементами любого приложения!
+
+## Списки в React 📜
+
+:::tip[Списки везде!]
+Списки — это основа веб-приложений. Список товаров в магазине, список друзей в соцсети, список сообщений в чате — всё это списки данных, которые нужно отобразить на странице.
+:::
+
+### Отображение простого списка
+
+Давай начнём с простого примера. Создай файл `FruitList.jsx`:
+
+```jsx
+// src/FruitList.jsx
+function FruitList() {
+  const fruits = ['🍎 Яблоко', '🍌 Банан', '🍊 Апельсин', '🍇 Виноград'];
+
+  return (
+    <div style={{ 
+      padding: '1rem', 
+      border: '2px solid #ff9800', 
+      borderRadius: '8px',
+      margin: '1rem 0' 
+    }}>
+      <h2>Мои любимые фрукты</h2>
+      <ul>
+        {fruits.map((fruit, index) => (
+          <li key={index}>{fruit}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default FruitList;
+```
+
+:::tip[Метод map()]
+`map()` — это метод массива, который создаёт новый массив, применяя функцию к каждому элементу. В React мы используем его для превращения данных в JSX элементы.
+
+```jsx
+// Было: ['яблоко', 'банан']
+// Стало: [<li>яблоко</li>, <li>банан</li>]
+```
+:::
+
+### Важность атрибута key
+
+React требует уникальный `key` для каждого элемента списка:
+
+```jsx
+{fruits.map((fruit, index) => (
+  <li key={index}>{fruit}</li>  // key помогает React отслеживать элементы
+))}
+```
+
+:::warning[Почему key важен?]
+`key` помогает React понять, какие элементы изменились, добавились или удалились. Без key React может работать медленно или некорректно при обновлении списков.
+
+**Лучше использовать уникальные ID, а не index, если они есть!**
+:::
+
+### Список объектов
+
+В реальных приложениях мы работаем с объектами. Создай файл `BookList.jsx`:
+
+```jsx
+// src/BookList.jsx
+function BookList() {
+  const books = [
+    { id: 1, title: 'Гарри Поттер', author: 'Дж. Роулинг', year: 1997 },
+    { id: 2, title: 'Властелин колец', author: 'Толкин', year: 1954 },
+    { id: 3, title: '1984', author: 'Оруэлл', year: 1949 },
+  ];
+
+  return (
+    <div style={{ 
+      padding: '1rem', 
+      border: '2px solid #9c27b0', 
+      borderRadius: '8px',
+      margin: '1rem 0' 
+    }}>
+      <h2>Библиотека книг 📚</h2>
+      <div>
+        {books.map((book) => (
+          <div 
+            key={book.id}  // Используем уникальный ID
+            style={{
+              padding: '0.75rem',
+              margin: '0.5rem 0',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '4px',
+              border: '1px solid #ddd'
+            }}
+          >
+            <h3 style={{ margin: '0 0 0.5rem 0', color: '#333' }}>
+              {book.title}
+            </h3>
+            <p style={{ margin: '0', color: '#666' }}>
+              Автор: {book.author} | Год: {book.year}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default BookList;
+```
+
+:::tip[ID вместо index]
+Обрати внимание: мы используем `key={book.id}` вместо `key={index}`. Это правильно, потому что ID уникален и не меняется при перестановке элементов.
+:::
+
+## Формы в React 📋
+
+:::tip[Контролируемые компоненты]
+В React формы работают по принципу **контролируемых компонентов** — значение поля ввода контролируется через state, а изменения обрабатываются через события.
+:::
+
+### Простая форма
+
+Создай файл `SimpleForm.jsx`:
+
+```jsx
+// src/SimpleForm.jsx
+import { useState } from 'react';
+
+function SimpleForm() {
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Предотвращаем перезагрузку страницы
+    alert(`Привет, ${name}! Твоё сообщение: "${message}"`);
+  };
+
+  return (
+    <div style={{ 
+      padding: '1rem', 
+      border: '2px solid #4caf50', 
+      borderRadius: '8px',
+      margin: '1rem 0',
+      maxWidth: '400px'
+    }}>
+      <h2>Простая форма 📝</h2>
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+            Имя:
+          </label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{ 
+              width: '100%', 
+              padding: '0.5rem',
+              border: '1px solid #ccc',
+              borderRadius: '4px'
+            }}
+            placeholder="Введи своё имя"
+          />
+        </div>
+        
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+            Сообщение:
+          </label>
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            style={{ 
+              width: '100%', 
+              padding: '0.5rem',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+              minHeight: '80px'
+            }}
+            placeholder="Напиши что-нибудь..."
+          />
+        </div>
+
+        <button 
+          type="submit"
+          style={{ 
+            padding: '0.75rem 1.5rem',
+            backgroundColor: '#4caf50',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          Отправить 🚀
+        </button>
+      </form>
+
+      {/* Показываем текущие значения */}
+      <div style={{ marginTop: '1rem', padding: '0.5rem', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+        <p><strong>Имя:</strong> {name || 'не введено'}</p>
+        <p><strong>Сообщение:</strong> {message || 'не введено'}</p>
+      </div>
+    </div>
+  );
+}
+
+export default SimpleForm;
+```
+
+### Ключевые концепции форм
+
+1. **value и onChange** — связывают поле с state:
+   ```jsx
+   <input 
+     value={name} 
+     onChange={(e) => setName(e.target.value)} 
+   />
+   ```
+
+2. **preventDefault()** — предотвращает стандартное поведение:
+   ```jsx
+   const handleSubmit = (e) => {
+     e.preventDefault(); // Страница не перезагружается, но попробуй нажать кнопку без этой строки!
+     // Обрабатываем данные
+   };
+   ```
+
+3. **Контролируемость** — React контролирует значение поля через state
+
+## Объединяем списки и формы 🔄
+
+Теперь создадим компонент, который объединяет списки и формы — простой список покупок!
+
+Создай файл `ShoppingList.jsx`:
+
+```jsx
+// src/ShoppingList.jsx
+import { useState } from 'react';
+
+function ShoppingList() {
+  const [items, setItems] = useState([
+    { id: 1, name: 'Хлеб', bought: false },
+    { id: 2, name: 'Молоко', bought: true },
+  ]);
+  const [newItem, setNewItem] = useState('');
+
+  const addItem = (e) => {
+    e.preventDefault();
+    if (newItem.trim()) {
+      const item = {
+        id: Date.now(), // Простой способ создать уникальный ID (текущее время)
+        name: newItem,
+        bought: false
+      };
+      setItems([...items, item]);
+      setNewItem(''); // Очищаем поле
+    }
+  };
+
+  const toggleItem = (id) => {
+    setItems(items.map(item => 
+      item.id === id 
+        ? { ...item, bought: !item.bought }
+        : item
+    ));
+  };
+
+  const deleteItem = (id) => {
+    setItems(items.filter(item => item.id !== id));
+  };
+
+  return (
+    <div style={{ 
+      padding: '1rem', 
+      border: '2px solid #2196f3', 
+      borderRadius: '8px',
+      margin: '1rem 0',
+      maxWidth: '500px'
+    }}>
+      <h2>Список покупок 🛒</h2>
+      
+      {/* Форма добавления */}
+      <form onSubmit={addItem} style={{ marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <input
+            type="text"
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+            placeholder="Что купить?"
+            style={{ 
+              flex: 1,
+              padding: '0.5rem',
+              border: '1px solid #ccc',
+              borderRadius: '4px'
+            }}
+          />
+          <button 
+            type="submit"
+            style={{ 
+              padding: '0.5rem 1rem',
+              backgroundColor: '#2196f3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            ➕ Добавить
+          </button>
+        </div>
+      </form>
+
+      {/* Список товаров */}
+      <div>
+        {items.length === 0 ? (
+          <p style={{ color: '#888', fontStyle: 'italic' }}>
+            Список пуст. Добавь первый товар! 😊
+          </p>
+        ) : (
+          items.map(item => (
+            <div 
+              key={item.id}
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center',
+                padding: '0.75rem',
+                margin: '0.5rem 0',
+                backgroundColor: item.bought ? '#e8f5e8' : '#fff',
+                border: '1px solid #ddd',
+                borderRadius: '4px'
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={item.bought}
+                onChange={() => toggleItem(item.id)}
+                style={{ marginRight: '0.75rem' }}
+              />
+              <span 
+                style={{ 
+                  flex: 1,
+                  textDecoration: item.bought ? 'line-through' : 'none',
+                  color: item.bought ? '#888' : '#333'
+                }}
+              >
+                {item.name}
+              </span>
+              <button 
+                onClick={() => deleteItem(item.id)}
+                style={{ 
+                  backgroundColor: '#f44336',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '0.25rem 0.5rem',
+                  cursor: 'pointer'
+                }}
+              >
+                🗑️
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Статистика */}
+      <div style={{ 
+        marginTop: '1rem', 
+        padding: '0.5rem',
+        backgroundColor: '#f5f5f5',
+        borderRadius: '4px',
+        textAlign: 'center'
+      }}>
+        <p style={{ margin: 0 }}>
+          Всего: {items.length} | 
+          Куплено: {items.filter(item => item.bought).length} | 
+          Осталось: {items.filter(item => !item.bought).length}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default ShoppingList;
+```
+
+## Практическое задание 🎯
+
+Создай своё мини-приложение, объединив всё изученное:
+
+Добавь все компоненты в `App.jsx`:
+
+```jsx
+// src/App.jsx
+import FruitList from './FruitList';
+import BookList from './BookList';
+import SimpleForm from './SimpleForm';
+import ShoppingList from './ShoppingList';
+import './App.css';
+
+function App() {
+  return (
+    <>
+      <h1>Урок 1.4: Списки и формы 🚀</h1>
+      <FruitList />
+      <BookList />
+      <SimpleForm />
+      <ShoppingList />
+    </>
+  );
+}
+
+export default App;
+```
+
+### Что нового ты узнала?
+
+:::tip[Новые концепции]
+- **map()** — превращение массивов в JSX элементы
+- **key prop** — уникальные идентификаторы для элементов списка
+- **Контролируемые компоненты** — связь полей формы с state
+- **preventDefault()** — предотвращение стандартного поведения
+- **Спред-оператор `...`** — для добавления элементов в массив
+- **filter()** — для удаления и фильтрации элементов
+:::
+
+## Итоги урока 📚
+
+Сегодня ты изучила две важнейшие темы:
+
+1. **Списки** 📜 — отображение массивов данных с помощью map()
+2. **Формы** 📋 — контролируемые компоненты и обработка пользовательского ввода
+
+### Дополнительные задания (если захочешь поэкспериментировать)
+
+Попробуй модифицировать компоненты:
+- В BookList добавь возможность отмечать прочитанные книги
+- В ShoppingList добавь кнопку "Очистить купленные"
+
+## Что дальше? 🚀
+
+В следующем уроке мы изучим:
+- useEffect и жизненный цикл компонентов
+- Загрузку данных из внешних источников
+
+:::success[Отличная работа!]
+Ты освоила основы работы с данными в React! Списки и формы — это база для создания настоящих приложений. Посмотри как Того впечатлён твоими успехами! 🐕✨
+::: 
